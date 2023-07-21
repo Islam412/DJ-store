@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     #----------end lib------------- 
     'shop',
     'contact',
+    'home',
 ]
 
 MIDDLEWARE = [
