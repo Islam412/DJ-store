@@ -1,9 +1,10 @@
 from django.urls import path
-from . import views
+from .views import ShopView,detail
 
 
 urlpatterns = [
-    path('',views.shop,name='shop'),
-    path('<int:id>',views.deatil,name='detail'),
+    path('', ShopView.as_view(), name='shop'),
+    path('<int:pk>',detail.as_view(),name='detail'),
+    
 
 ]

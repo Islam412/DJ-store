@@ -5,6 +5,8 @@ from colorfield.fields import ColorField
 
 
 class Product(models.Model):
+
+
     choise=[
     ('Laptop','Laptop'),
     ('Computer','Computer'),
@@ -18,7 +20,7 @@ class Product(models.Model):
     Description = models.TextField(max_length=2000)
     Image = models.ImageField(upload_to='images/')
     Availability = models.BooleanField(default=True)
-    Color=ColorField(default='#FF0000')
+    Color=ColorField(default='#000000')
     Categore = models.CharField(max_length=50, choices=choise, blank=True, null=True)
 
 
