@@ -1,5 +1,5 @@
 {% for pro in pro  %}
 <h1>{{pro.Name}}</h1>
-<img src="{{pro.Image.url}}" alt="">
+<a href="{% url 'detail' pro.id %}"> <img src="{{pro.Image.url}}">  </a>
 {% endfor %}
 
