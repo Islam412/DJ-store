@@ -1,6 +1,6 @@
 from django.db import models
 from colorfield.fields import ColorField
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -32,7 +32,7 @@ class Product(models.Model):
 
 
 
-from django.contrib.auth.models import User
+
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -49,3 +49,6 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} x {self.product.name} in Cart for {self.cart.user.username}"
+    
+
+

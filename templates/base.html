@@ -1,0 +1,451 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RAFCART - Multipurpose eCommerce HTML Template">
+    <meta name="author" content="Programming Kit">
+    <title>RAFCART - Multipurpose eCommerce HTML Template</title>
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+
+    <!-- all css -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/line-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+</head>
+
+<body>
+ 
+    <header class="home-2 d-none d-lg-block">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <div class="logo">
+                    <a href="{% url 'home' %}">
+                        <img loading="lazy"  src="{% static 'assets/images/svg/logo.svg' %}" alt="logo">
+                    </a>
+                </div>
+
+                <ul class="nav_bar flex-grow-1">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'shop' %}">Shop</a></li>
+                    <li><a href="{% url 'contact' %}">contact</a></li>
+                    <li class="tophead_items ms-auto">
+                        <div class="me-3">
+                            <a class="text-semibold me-0" href="{% url 'signin' %}">login</a><span class="text_xs">/</span><a
+                                class="text-semibold" href="{% url 'signup' %}">Register</a>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </header>
+      <nav class="home-2">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between">
+                <a href="{% url 'home' %}" class="mobile_logo d-block d-lg-none">
+                    <img loading="lazy"  src="{% static 'assets/images/svg/logo-white.svg' %}" alt="logo">
+                </a>
+                <div class="all_category d-none d-lg-block">
+                    <div class="bars text-white d-flex align-items-center justify-content-center">
+                        <span class="icon">
+                            <i class="las la-bars"></i>
+                        </span>
+                        <span class="icon_text">All categories</span>
+                    </div>
+                    <div class="sub_categories active">
+                        <h5 class="d-block position-relative d-lg-none subcats_title">
+                            All categories
+                        </h5>
+                        <a href="#" class="singlecats">
+                            <span class="img_wrp">
+     
+                             <i class="las la-shoe-prints"></i>     
+                            </span>
+                            <span class="txt">Shoes</span>
+                        </a>
+
+                        <div class="singlecats withsub">
+                            <span class="img_wrp">
+                                <i class="las la-male"></i>
+                            </span>
+                            <span class="txt">Men</span>
+                            <span class="wsicon"><i class="las la-angle-right"></i></span>
+                            <div class="mega_menu">
+                                <div class="single_mega_menu">
+                                    <div class="mega_menu_wrap">
+                                        <h4>Hot sale</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Hoodies $ Sweatshirts</a>
+                                            <a href="#">T-Shirt</a>
+                                            <a href="#">Men’s Sets</a>
+                                            <a href="#">Jacket</a>
+                                            <a href="#">Shoes</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega_menu_wrap">
+                                        <h4>Bottoms</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Casual Pants</a>
+                                            <a href="#">Men’s Sleep & Lounge</a>
+                                            <a href="#">Jeans</a>
+                                            <a href="#">Shorts</a>
+                                            <a href="#">Towel</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="single_mega_menu">
+                                    <div class="mega_menu_wrap">
+                                        <h4>Outerwear $ Jackets</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Jacket</a>
+                                            <a href="#">Sweaters</a>
+                                            <a href="#">Casual Faux Leather</a>
+                                            <a href="#">Parks</a>
+                                            <a href="#">Jeans</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega_menu_wrap">
+                                        <h4>Underwear & Loun</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Boxes</a>
+                                            <a href="#">Berifs</a>
+                                            <a href="#">Long Johns</a>
+                                            <a href="#">Men’s Sleep & Lounge</a>
+                                            <a href="#">Parks</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="single_mega_menu">
+                                    <div class="mega_menu_wrap">
+                                        <h4>Accessories</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Scarves</a>
+                                            <a href="#">Skullies & Beanies</a>
+                                            <a href="#">Casual Faux Leather</a>
+                                            <a href="#">Prescription Glasses</a>
+                                            <a href="#">Belt</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega_menu_wrap">
+                                        <h4>Novelty & Special</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Cosplay Costumes</a>
+                                            <a href="#">Stage & Dance Wear</a>
+                                            <a href="#">Exotic Apparel</a>
+                                            <a href="#">Scarves</a>
+                                            <a href="#">Men’s Sets</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="singlecats">
+                            <span class="img_wrp">
+                                <i class="las la-female"></i>
+                            </span>
+                            <span class="txt">Women</span>
+                        </a>
+                        <a href="#" class="singlecats">
+                            <span class="img_wrp">
+                                <i class="las la-plug"></i>
+                            </span>
+                            <span class="txt">Electronisc</span>
+                        </a>
+                        <a href="#" class="singlecats">
+                            <span class="img_wrp">
+                                <i class="las la-headphones"></i>
+                            </span>
+                            <span class="txt">Headphones</span>
+                        </a>
+                        <a href="#" class="singlecats">
+                            <span class="img_wrp">
+                                <i class="icon-watch"></i>
+                            </span>
+                            <span class="txt">Watches</span>
+                        </a>
+                        <div class="singlecats withsub">
+                            <span class="img_wrp">
+                                <i class="las la-desktop"></i>
+                            </span>
+                            <span class="txt">Computer</span>
+                            <span class="wsicon"><i class="las la-angle-right"></i></span>
+                            <div class="mega_menu">
+                                <div class="single_mega_menu">
+                                    <div class="mega_menu_wrap">
+                                        <h4>Macbook</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Mackbook m1</a>
+                                            <a href="#">Mackbook pro</a>
+                                            <a href="#">Mackbook air</a>
+                                            <a href="#">Mackbook 2015</a>
+                                            <a href="#">Mackbook 2020</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega_menu_wrap">
+                                        <h4>Laptop</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Razer</a>
+                                            <a href="#">Hp Laptop</a>
+                                            <a href="#">Dell Notebook</a>
+                                            <a href="#">Asus</a>
+                                            <a href="#">Lenovo</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="single_mega_menu">
+                                    <div class="mega_menu_wrap">
+                                        <h4>Dasktop</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Brand Dasktop</a>
+                                            <a href="#">All in one pc</a>
+                                            <a href="#">Mini PC</a>
+                                            <a href="#">Customize PC</a>
+                                            <a href="#">Dasktop Accessories</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega_menu_wrap">
+                                        <h4>Monitor</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Samsung</a>
+                                            <a href="#">Philips</a>
+                                            <a href="#">LG</a>
+                                            <a href="#">HP</a>
+                                            <a href="#">Xiaomi</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="single_mega_menu">
+                                    <div class="mega_menu_wrap">
+                                        <h4>Accessories</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Dasktop Ram</a>
+                                            <a href="#">Motherboard</a>
+                                            <a href="#">SSD Card</a>
+                                            <a href="#">Hard disk</a>
+                                            <a href="#">Processor</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega_menu_wrap">
+                                        <h4>Gaming</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Gaming console</a>
+                                            <a href="#">Gaming Chair</a>
+                                            <a href="#">Gaming Desk</a>
+                                            <a href="#">Gaming Controller</a>
+                                            <a href="#">Keyboard</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="singlecats">
+                            <span class="img_wrp">
+                                <i class="las la-mobile"></i>
+                            </span>
+                            <span class="txt">Mobile</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="search_wrap d-none d-lg-block">
+
+                    <div class="search d-flex">
+                        
+                        <div class="search_input">
+                            <input type="text" placeholder="Search product..." id="show_suggest">
+                        </div>
+                        <div class="search_subimt">
+                            <button>
+                                <span class="d-none d-sm-inline-block">Search</span>
+                                <span class="d-sm-none d-inline-block"><i class="icon-search-left"></i></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="search_suggest shadow-sm">
+                        <div class="search_result_product">
+                            <a href="product-view.html" class="single_sresult_product">
+                            </a>
+                            <a href="product-view.html" class="single_sresult_product">
+
+
+                                <div class="sresult_img">
+                                    <img loading="lazy"  src="assets/images/laptop-1.png" alt="product">
+                                </div>
+                                <div class="sresult_content">
+                                    <h4>HP Pavilion 15</h4>
+                                    <div class="price">
+                                        <span class="org_price">$45.00</span>
+                                    </div>
+                                </div>
+
+
+
+
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="header_icon d-flex align-items-center">
+                    <a href="wish-list.html" class="icon_wrp text-center wishlist ms-0">
+                        <span class="icon">
+                            <i class="icon-heart"></i>
+                        </span>
+                        <span class="icon_text">Wish List</span>
+                        <span class="pops">6</span>
+                    </a>
+                    <div class="shopcart">
+                        <a href="{% url 'cart' %}" class="icon_wrp text-center d-none d-lg-block">
+                            <span class="icon">
+                                <i class="icon-cart"></i>
+                            </span>
+                            <span class="icon_text">Cart</span>
+                            <span class="pops">8</span>
+                        </a>
+                      
+                    </div>
+                    <div class="position-relative myacwrap">
+                        <a href="javascript:void(0)" class="icon_wrp text-center myacc">
+                            <span class="icon">
+                               <i class="icon-user-line"></i>
+                            </span>
+                            <span class="icon_text">Account</span>
+                        </a>
+                        <div class="myacc_cont">
+                            <div class="ac_join">
+                                <p>Welcome to RAFCART Shop</p>
+                                <div class="account_btn d-flex justify-content-between">
+                                   <a href="{% url 'signup' %}" class="default_btn">Join</a>
+                                    <a href="{% url 'signin' %}" class="default_btn second">Sing in</a>
+                                </div>
+                            </div>
+                            <div class="ac_links">
+                                  <a href="account.html" class="myac">
+                                    <i class="lar la-id-card"></i>
+                                    My Account
+                                </a>
+                               <a href="account-order-history.html">
+                                    <i class="las la-gift"></i>
+                                    My Order
+                                </a>
+                               <a href="wish-list.html">
+                                    <i class="lar la-heart"></i>
+                                    My Wishlist
+                                </a>
+                                <a href="shopping-cart.html">
+                                     <i class="icon-cart"></i>
+                                    My Cart
+                                </a>
+                                <a href="login.html">
+                                    <i class="las la-power-off"></i>
+                                    Log out
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    {% block content %}
+    
+    {% endblock content %}
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-md-0">
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="footer_logo">
+                               <img loading="lazy"  src="{% static 'images/svg/logo.svg' %}" alt="easy shop">
+                            </div>
+                            <div class="footet_text">
+                                <p>Lorem ipsum, or lipsum as it is sometimes kno
+                                    wn, is dummy text used in laying out print, gra
+                                    phic or web designs the passage.</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="footer_newslet">
+                                <h4>Newsletter</h4>
+                                <form class="footernews_form">
+                                    <input type="text" placeholder="Your email address">
+                                    <button type="submit" class="default_btn">Subscribe</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3 mb-md-0">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="footer_menu">
+                                <h4 class="footer_title">My Account</h4>
+                                <a href="account-order-history.html">Orders</a>
+                                <a href="wish-list.html">Wishlist</a>
+                                <a href="track-order.html">Track Order</a>
+                                <a href="#">Manage Account</a>
+                                <a href="return-order.html">Return Order</a>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="footer_menu">
+                                <h4 class="footer_title">Information</h4>
+                                <a href="about-us.html">About Us</a>
+                                <a href="return-policy.html">Return Policy</a>
+                                <a href="terms-condition.html">Terms & condition</a>
+                                <a href="privacy-policy.html">Privacy Policy</a>
+                                <a href="faq.html">FAQ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="footer_download">
+                        <div class="row">
+                            <div class="col-lg-6 col-lg-12">
+                                <h4 class="footer_title">Contact</h4>
+                                <div class="footer_contact">
+                                    <p>
+                                        <span class="icn"><i class="las la-map-marker-alt"></i></span>
+
+                                        7895 Dr New Albuquerue, NM 19800, <br> United
+                                        States Of America
+                                    </p>
+                                    <p class="phn">
+                                        <span class="icn"><i class="las la-phone"></i></span>
+                                        +566 477 256, +566 254 575
+                                    </p>
+                                    <p class="eml">
+                                        <span class="icn"><i class="lar la-envelope"></i></span>
+                                        info@domain.com
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="footer_social col-lg-6 col-lg-12">
+                                <div class="footer_icon d-flex">
+                                    <a href="#" class="facebook"><i class="lab la-facebook-f"></i></a>
+                                    <a href="#" class="twitter"><i class="lab la-twitter"></i></a>
+                                    <a href="#" class="instagram"><i class="lab la-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

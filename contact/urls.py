@@ -3,5 +3,5 @@ from . views import contact
 
 
 urlpatterns = [
-    path('', contact.as_view(), name='shop'),
+    path('', contact.as_view(), name='contact'),
 ]

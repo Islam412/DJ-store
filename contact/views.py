@@ -13,7 +13,7 @@ def contact(request):
 
 class contact(ListView):
     model = Info
-    template_name = 'contact.html'
+    template_name = 'contact/contact.html'
     context_object_name = 'info'
 
 

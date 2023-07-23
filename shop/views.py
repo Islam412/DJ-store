@@ -6,7 +6,7 @@ from django.views.generic import ListView,DeleteView,DetailView
 
 class ShopView(ListView):
     model = Product
-    template_name = 'shop.html'
+    template_name = 'shop/shop.html'
     context_object_name = 'pro'
     
 
@@ -17,7 +17,7 @@ class ShopView(ListView):
 
 class detail(DetailView):
     model = Product
-    template_name = 'detail.html'
+    template_name = 'shop/detail.html'
     context_object_name = 'pro'
 
 
@@ -45,4 +45,4 @@ def view_cart(request):
             cart_items = None
     else:
         cart_items = None
-    return render(request, 'cart.html', {'cart_items': cart_items})
+    return render(request, 'shop/cart.html', {'cart_items': cart_items})
