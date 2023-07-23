@@ -37,8 +37,14 @@
                     <li><a href="{% url 'contact' %}">contact</a></li>
                     <li class="tophead_items ms-auto">
                         <div class="me-3">
-                            <a class="text-semibold me-0" href="{% url 'signin' %}">login</a><span class="text_xs">/</span><a
-                                class="text-semibold" href="{% url 'signup' %}">Register</a>
+
+                            
+                            {% if user.is_authenticated %}
+                                <a class="text-semibold" href="{% url 'logout' %}">Logout</a>
+                            {% else %}
+                                <a class="text-semibold me-0" href="{% url 'signin' %}">login</a><span class="text_xs">/</span>
+                                <a class="text-semibold" href="{% url 'signup' %}">Register</a>
+                            {% endif %}
                         </div>
                     </li>
                 </ul>

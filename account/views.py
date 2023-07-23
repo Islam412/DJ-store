@@ -18,7 +18,7 @@ def signup (request):
 
       myuser.save()
       return redirect('signin')
-   return render(request,'account/signup.html')
+   return render(request,'account/register.html')
 
 
 
