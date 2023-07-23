@@ -1,19 +1,89 @@
-<!-- cart.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Shopping Cart</title>
-</head>
-<body>
-    <h1>Your Shopping Cart</h1>
-    {% if cart_items %}
-        <ul>
-            {% for item in cart_items %}
-                <li>{{ item.quantity }} x {{ item.product.Name }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Your cart is empty.</p>
-    {% endif %}
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <!-- breadcrumbs -->
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="{% url 'home'  %}"><i class="las la-home"></i></a>
+        <a href="#" class="active">Shopping Cart</a>
+      </div>
+    </div>
+
+     <div class="cart_area section_padding_b">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9">
+            <h4 class="shop_cart_title sopcart_ttl d-none d-lg-flex">
+              <span>Product</span>
+              <span>Quantity</span>
+              <span>Total Price</span>
+            </h4>
+            <div class="shop_cart_wrap">
+               {% for item in cart_items %}
+              <div class="single_shop_cart d-flex align-items-center flex-wrap">
+                <div class="cart_img mb-4 mb-md-0">
+                  <img
+                    loading="lazy"
+                    src="{{ item.product.Image.url }}"
+                    alt="product"
+                  />
+                </div>
+                <div class="cart_cont">
+                  <a href="product-view.html">
+                    <h5> {{ item.product.Name }}</h5>
+                  </a>
+                  <p class="price">{{ item.product.Price }}</p>
+                  <p class="size mb-0">Size: M</p>
+                </div>
+                <div class="cart_qnty d-flex align-items-center ms-md-auto">
+                  <div class="cart_qnty_btn">
+                    <i class="las la-minus"></i>
+                  </div>
+                  <div class="cart_count">{{ item.quantity }}</div>
+                  <div class="cart_qnty_btn">
+                    <i class="las la-plus"></i>
+                  </div>
+                </div>
+                <div class="cart_price ms-auto">
+                  <p>$45.00</p>
+                </div>
+                <div class="cart_remove ms-auto">
+                  <i class="icon-trash"></i>
+                </div>
+              </div>
+              {% endfor %}
+
+            </div>
+          </div>
+          <div class="col-lg-3 mt-4 mt-lg-0">
+            <div class="cart_summary">
+              <h4>Order Summary</h4>
+              <div class="cartsum_text d-flex justify-content-between">
+                <p class="text-semibold">Subtotal</p>
+                <p class="text-semibold">$45.00</p>
+              </div>
+              <div class="cartsum_text d-flex justify-content-between">
+                <p>Delivery</p>
+                <p>Free</p>
+              </div>
+              <div class="cartsum_text d-flex justify-content-between">
+                <p>Tax</p>
+                <p>Free</p>
+              </div>
+              <div class="cart_sum_total d-flex justify-content-between">
+                <p>Total</p>
+                <p>$45.00</p>
+              </div>
+              <div class="cart_sum_coupon">
+                <input type="text" placeholder="Enter coupon" />
+                <button>apply</button>
+              </div>
+              <div class="cart_sum_pros">
+                <button>Proccees to checkout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock content %}
