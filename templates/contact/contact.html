@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{%load static%}
+{%block content%}
+
+
+  
+
+
+    <!-- contact form -->
+<div class="contact_form section_padding">
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-xl-8 col-lg-7 col-12">
+                    <div class="billing_form padding_default shadow_sm">
+                        <h4 class="title_2">Leave us a message</h4>
+                        <p class="mb-4 text_md">Use the form below to get in touch with the sales team</p>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="single_billing_inp">
+                                    <label for="first_name"> Name <span>*</span></label>
+                                    <input type="text" id="first_name" Name='name'>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="single_billing_inp">
+                                    <label for="email_addr">Email Address <span>*</span></label>
+                                    <input type="text" id="email_addr" Name='email'>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="single_billing_inp">
+                                    <label for="county_region">Your message <span>*</span></label>
+                                    <textarea type="text" id="county_region" Name='message'></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button type="submit" class="default_btn xs_btn rounded px-4">send message</button>
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
+        </form>
+
+                <div class="col-lg-5 col-xl-4 col-12 mt-4 mt-lg-0">
+                    <div class="padding_default border-0 shadow_sm">
+                        <h4 class="title_4">our store</h4>
+                        <div class="footer_contact">
+                            <p>
+                                <span class="icn"><i class="las la-map-marker-alt"></i></span>
+                               {{myinfo.Place}}
+                            </p>
+                            <p class="phn">
+                                <span class="icn"><i class="las la-phone"></i></span>
+                                {{myinfo.Phone_number}}
+                            </p>
+                            <p class="eml">
+                                <span class="icn"><i class="lar la-envelope"></i></span>
+                                {{myinfo.email}}
+                            </p>
+                        </div>
+
+                        <h4 class="title_4 mt-4">Hours of operation</h4>
+                        <div class="cartsum_text d-flex justify-content-between">
+                            <p class="">Saturday</p>
+                            <p class="">12:00 PM</p>
+                        </div>
+                        <div class="cartsum_text d-flex justify-content-between">
+                            <p class="">Sunday</p>
+                            <p class="">12:00 PM</p>
+                        </div>
+                        <div class="cartsum_text d-flex justify-content-between">
+                            <p class="">Monday</p>
+                            <p class="">12:00 PM</p>
+                        </div>
+                        <div class="cartsum_text d-flex justify-content-between">
+                            <p class="">Tuesday</p>
+                            <p class="">12:00 PM</p>
+                        </div>
+                        <div class="cartsum_text d-flex justify-content-between">
+                            <p class="">Wednesday</p>
+                            <p class="">12:00 PM</p>
+                        </div>
+                        <div class="cartsum_text d-flex justify-content-between">
+                            <p class="">Thursday</p>
+                            <p class="">12:00 PM</p>
+                        </div>
+                        <div class="cartsum_text d-flex justify-content-between mb-0">
+                            <p class=" mb-0">Friday</p>
+                            <p class=" mb-0">12:00 PM</p>
+                        </div>
+
+                        <h4 class="title_4 mt-4">Careers</h4>
+                        <p class="text_md mb-0">If you are interesting in emplyment opportunities at RAFCARTs. Please
+                            email us : <a href="#" class="text-color">contact@familiar.com</a>
+                        </p>
+                       
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+    <!--                    -->
+{%endblock content%}
