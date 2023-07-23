@@ -45,10 +45,14 @@
                   </div>
                 </div>
                 <div class="cart_price ms-auto">
-                  <p>$45.00</p>
+                  <p>{{item.product.Price }}</p>
                 </div>
                 <div class="cart_remove ms-auto">
-                  <i class="icon-trash"></i>
+                   <form action="{% url 'delete_cart_item' item.id %}" method="post">
+                     {% csrf_token %}
+                    <button type="submit"> <i class="icon-trash"></i> </button> 
+                    </form>
+
                 </div>
               </div>
               {% endfor %}
@@ -72,7 +76,7 @@
               </div>
               <div class="cart_sum_total d-flex justify-content-between">
                 <p>Total</p>
-                <p>$45.00</p>
+                <p></p>
               </div>
               <div class="cart_sum_coupon">
                 <input type="text" placeholder="Enter coupon" />

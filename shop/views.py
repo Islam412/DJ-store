@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, redirect
 from .models import Product,Cart, CartItem
 from django.views.generic import ListView,DeleteView,DetailView
 
@@ -46,3 +47,9 @@ def view_cart(request):
     else:
         cart_items = None
     return render(request, 'shop/cart.html', {'cart_items': cart_items})
+
+
+def delete_cart_item(request, item_id):
+    cart_item = get_object_or_404(CartItem, id=item_id)
+    cart_item.delete()
+    return redirect('cart') 
