@@ -1,5 +1,6 @@
 {% for pro in pro  %}
 <h1>{{pro.Name}}</h1>
 <a href="{% url 'detail' pro.id %}"> <img src="{{pro.Image.url}}">  </a>
+<a href="{% url 'add_to_cart' pro.id %}">Add to cart</a>
 {% endfor %}
 
