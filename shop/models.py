@@ -22,6 +22,7 @@ class Product(models.Model):
     Availability = models.BooleanField(default=True)
     Color=ColorField(default='#000000')
     Categore = models.CharField(max_length=50, choices=choise, blank=True, null=True)
+    Brand = models.CharField(max_length=20,null=True)
 
 
 
