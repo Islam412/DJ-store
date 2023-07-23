@@ -268,7 +268,8 @@
                     <div class="search d-flex">
                         
                         <div class="search_input">
-                            <input type="text" placeholder="Search product..." id="show_suggest">
+                            <form method="GET" action="{% url 'home' %}">
+                                <input type="text" name="search_query" value="{{ search_query }}" placeholder="Search product..." id="show_suggest">
                         </div>
                         <div class="search_subimt">
                             <button>
@@ -283,16 +284,20 @@
                             </a>
                             <a href="product-view.html" class="single_sresult_product">
 
-
-                                <div class="sresult_img">
-                                    <img loading="lazy"  src="assets/images/laptop-1.png" alt="product">
-                                </div>
-                                <div class="sresult_content">
-                                    <h4>HP Pavilion 15</h4>
-                                    <div class="price">
-                                        <span class="org_price">$45.00</span>
+                                {% for product in products %}
+                                    <div class="sresult_img">
+                                       <a href="{% url 'detail' product.id %}"> <img loading="lazy" src="{{product.Image.url}}" alt="product"> </a> 
                                     </div>
-                                </div>
+                                    <div class="sresult_content">
+                                        <h4>{{product.Name}}</h4>
+                                        
+                                    </div>
+
+                                {% empty %}
+                                    
+
+                                {% endfor %}
+                                
 
 
 
