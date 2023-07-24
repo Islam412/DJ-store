@@ -144,3 +144,6 @@ EMAIL_HOST_USER='masterkhaled33@gmail.com'
 EMAIL_HOST_PASSWORD='puyhkrieujulpcru'
 EMAIL_USE_TLS=True
 EMAIL_PORT='587'
+
+
+

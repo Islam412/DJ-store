@@ -53,3 +53,13 @@ class CartItem(models.Model):
     
 
 
+
+
+
+
+class WishlistItem(models.Model):
+    name = models.CharField(max_length=100)
+    Image = models.ImageField(upload_to='wishlist_images/', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
