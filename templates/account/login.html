@@ -4,7 +4,7 @@
 
 
     <!--Login wrap-->
-    <form method="POST">
+    <form method="post" action="{% url 'signin' %}" >
       {% csrf_token %}
       <div class="register_wrap section_padding_b">
           <div class="container">
@@ -18,7 +18,7 @@
                       <div class="col-12">
                         <div class="single_billing_inp">
                           <label>Name <span>*</span></label>
-                          <input type="name"  name ='username' placeholder="Mohamed" />
+                          <input type="name"  name ='name' placeholder="Mohamed" />
                         </div>
                       </div>
                       <div class="col-12">

@@ -2,7 +2,7 @@
 {%load static%}
 {%block content%}
 
-<form method=post> 
+<form method="post" action="{% url 'signup' %}">
     {% csrf_token %}
     <div class="register_wrap section_padding_b">
         <div class="container">
@@ -15,7 +15,7 @@
                                 <div class="col-12">
                                     <div class="single_billing_inp">
                                         <label>Full Name <span>*</span></label>
-                                        <input type="text" name='username' placeholder="Mohamed">
+                                        <input type="text" name='name' placeholder="Mohamed">
                                     </div>
                                 </div>
                                 <div class="col-12">
