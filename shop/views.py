@@ -49,8 +49,8 @@ def view_cart(request):
     return render(request, 'shop/cart.html', {'cart_items': cart_items})
 
 
-def delete_cart_item(request, item_id):
-    cart_item = get_object_or_404(CartItem, id=item_id)
+def delete_cart_item(request, id):
+    cart_item = get_object_or_404(CartItem, id=id)
     cart_item.delete()
     return redirect('cart') 
 
