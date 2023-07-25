@@ -1,8 +1,7 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404, redirect
-from .models import Product,Cart, CartItem
+from .models import Product,Cart, CartItem , Wishlist , wishlistItem
 from django.views.generic import ListView,DeleteView,DetailView
-from .models import WishlistItem
 # Create your views here.
 
 class ShopView(ListView):
@@ -20,6 +19,8 @@ class detail(DetailView):
     model = Product
     template_name = 'shop/detail.html'
     context_object_name = 'pro'
+
+
 
 
 
@@ -56,27 +57,31 @@ def delete_cart_item(request, id):
 
 
 
-
-
-
-
-
-
-
-
-def add_to_wishlist(request, id):
-    item = Product.objects.get(id=id)  # Replace YourShopItemModel with your actual shop item model.
-    WishlistItem.objects.create(name=item.Name, Image = item.Image )
+def add_to_wishlist(request, product_id):
+    if request.user.is_authenticated:
+        wishlist, created = Wishlist.objects.get_or_create(user=request.user)
+        product = Product.objects.get(pk=product_id)  # Replace with your product model
+        wishlist_Item, created = wishlistItem.objects.get_or_create(wishlist=wishlist, product=product)
+        if not created:
+            wishlist_Item.quantity += 1
+            wishlist_Item.save()
     return redirect('wishlist_list')
 
 
-def wishlistitem_list(request):
-    pro = WishlistItem.objects.all()
-    return render(request,'wishlist/wishlistitem_list.html',{'pro':pro})
+def view_wishlist(request):
+    if request.user.is_authenticated:
+        wishlist = Wishlist.objects.filter(user=request.user).first()
+        if wishlist:
+            wishlist_items = wishlistItem.objects.filter(wishlist=wishlist)
+        else:
+            wishlist_items = None
+    else:
+        wishlist_items = None
+    return render(request, 'wishlist/wishlistitem_list.html', {'wishlist_items': wishlist_items})
 
 
-
-def delete_wishlist_item(request, id):
-    WishlistItem.objects.filter(id=id).delete()
-    return redirect('wishlist_list')
+def delete_wishlist_item(request, product_id):
+    wishlist_items = get_object_or_404(wishlistItem, id=product_id)
+    wishlist_items.delete()
+    return redirect('wishlist_list') 
 

@@ -88,27 +88,43 @@
 
           <div class="col-lg-9">
             <div class="shop_cart_wrap wishlist">
-             {% for pro in pro %}
-              <div class="single_shop_cart d-flex align-items-center flex-wrap">
-                <div class="cart_img mb-4 mb-md-0">
-                  <img
-                    loading="lazy"
-                    src="{{pro.Image.url}}"
-                    alt="product"
-                  />
-                </div>
-                <div class="cart_cont">
-                  <a href="product-view.html"
-                    ><h5>{{pro.name}}</h5></a
-                  >
-                </div>
+             {% for item in wishlist_items %}
+              
+                <div class="single_shop_cart d-flex align-items-center flex-wrap">
+                  <div class="cart_img mb-4 mb-md-0">
+                    <img
+                      loading="lazy"
+                      src="{{ item.product.Image.url }}"
+                      alt="product"
+                    />
+                  </div>
+                  <div class="cart_cont">
+                    <a href="product-view.html">
+                      <h5> {{ item.product.Name }}</h5>
+                    </a>
+                    <p class="price">{{ item.product.Price }}</p>
+                    <p class="size mb-0">Size: M</p>
+                  </div>
+                  <div class="cart_qnty d-flex align-items-center ms-md-auto">
+                    <div class="cart_qnty_btn">
+                      <i class="las la-minus"></i>
+                    </div>
+                    <div class="cart_count">{{ item.quantity }}</div>
+                    <div class="cart_qnty_btn">
+                      <i class="las la-plus"></i>
+                    </div>
+                  </div>
+                  <div class="cart_price ms-auto">
+                    <p>{{item.product.Price }}</p>
+                  </div>
+                  <div class="cart_remove ms-auto">
+                    <form action="{% url 'delete_cart_item' item.id %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit"> <i class="icon-trash"></i> </button> 
+                      </form>
 
-                <div class="cart_price ms-md-auto ms-0">
-                  <p></p>
+                  </div>
                 </div>
-                
-                 
-              </div>
              {% endfor %}
               
             </div>

@@ -58,9 +58,17 @@ class CartItem(models.Model):
 
 
 
-class WishlistItem(models.Model):
-    name = models.CharField(max_length=100)
-    Image = models.ImageField(upload_to='wishlist_images/', blank=True, null=True)
+class Wishlist(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return f"wishlist for {self.user.username}"
+
+class wishlistItem(models.Model):
+    wishlist = models.ForeignKey(Wishlist, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product.Name} in wishlist for {self.wishlist.user.username}"
