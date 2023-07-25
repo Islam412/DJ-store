@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
-{%load static%}
-{%block content%}
 
-<form method="post" action="{% url 'signup' %}">
+{% extends 'base.html' %}
+<!-- register.html -->
+{% block content %}
+<form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="register_wrap section_padding_b">
         <div class="container">
@@ -36,6 +36,14 @@
                                         <input type="password" name = 'password2' placeholder="confirm your password">
                                     </div>
                                 </div>
+                                <div class="col-12">
+                                    <div class="single_billing_inp">
+                                        <label>Role <span>*</span></label>
+                                        <input type="text" name = 'role' placeholder="admin / user" >
+                                        <label>Age <span>*</span></label>
+                                        <input type="text" name = 'age' placeholder="enter your Age" >
+                                    </div>
+                                </div>
                                 <div class="col-12 mt-3">
                                     <button type="submit" class="default_btn xs_btn rounded px-4 d-block w-100">create
                                         account</button>
@@ -64,7 +72,5 @@
             </div>
         </div>
     </div>
-</form> 
-
-
-{%endblock content%}
+</form>
+{% endblock content %}

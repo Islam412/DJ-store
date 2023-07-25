@@ -1,8 +1,8 @@
 # custom_user/views.py
-
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .models import CustomUser
+
 
 def signup(request):
     if request.method == 'POST':
@@ -19,14 +19,13 @@ def signup(request):
             img=img,
             age=age,
             email=email,
-            password=password,
             role=role
         )
+        user.set_password(password)  # Hash the password before saving
         user.save()
 
         # Redirect to a success page or any other appropriate view
-        return redirect('login/')
-
+        return redirect('signin/')  # Use the name of the URL pattern, not the URL itself
 
     return render(request, 'account/register.html')
 
