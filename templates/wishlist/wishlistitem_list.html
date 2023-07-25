@@ -118,10 +118,10 @@
                     <p>{{item.product.Price }}</p>
                   </div>
                   <div class="cart_remove ms-auto">
-                    <form action="{% url 'delete_cart_item' item.id %}" method="post">
+                    <form action="{% url 'delete_wishlist_item' item.id %}" method="post">
                       {% csrf_token %}
                       <button type="submit"> <i class="icon-trash"></i> </button> 
-                      </form>
+                    </form>
 
                   </div>
                 </div>
