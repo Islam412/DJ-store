@@ -25,18 +25,20 @@ def signup(request):
         user.save()
 
         # Redirect to a success page or any other appropriate view
-        return redirect('login')
+        return redirect('login/')
 
 
     return render(request, 'account/register.html')
 
+
+
 def signin(request):
     if request.method == 'POST':
-        Name = request.POST.get('name')
+        email = request.POST.get('email')
         password = request.POST.get('password')
 
         # Authenticate the user
-        user = authenticate(request, email=Name, password=password)
+        user = authenticate(request, email=email, password=password)
 
         if user is not None:
             login(request, user)

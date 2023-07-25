@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% load static %}
 {% block content %}
@@ -189,89 +189,51 @@
                 </div>
             </div>
             <div class="row gy-4">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single_new_arrive">
-                        <div class="sna_img">
-                           <img loading="lazy" class="prd_img" src="{% static 'assets/images/laptop-3.png' %}" alt="product">
-                            <span class="tag">Hot</span>
-                            <div class="prodcut_hovcont">
-                                <a href="javascript:void(0)" class="icon open_quickview" tabindex="0">
-                                   <i class="icon-search-left"></i>
-                                </a>
-                                <a href="#" class="icon" tabindex="0">
-                                    <i class="icon-heart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="sna_content">
-                            <a href="product-view.html">
-                                <h4>HP Pavilion 15</h4>
-                            </a>
-                            <div class="ratprice">
-                                <div class="price">
-                                    <span class="org_price">$45.00</span>
-                                    <span class="prev_price">$55.45</span>
+                {% for i in pro  %}
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single_new_arrive">
+                            <div class="sna_img">
+                            <img loading="lazy" class="prd_img" src="{{i.Image.url}}" alt="product">
+                                <span class="tag">Hot</span>
+                                <div class="prodcut_hovcont">
+                                    <a href="javascript:void(0)" class="icon open_quickview" tabindex="0">
+                                    <i class="icon-search-left"></i>
+                                    </a>
+                                    <a href="#" class="icon" tabindex="0">
+                                        <i class="icon-heart"></i>
+                                    </a>
                                 </div>
-                                <div class="rating">
-                                    <div class="d-flex align-items-center justify-content-start">
-                                        <div class="rating_star">
-                                            <span><i class="las la-star"></i></span>
-                                            <span><i class="las la-star"></i></span>
-                                            <span><i class="las la-star"></i></span>
-                                            <span><i class="las la-star"></i></span>
-                                            <span><i class="las la-star"></i></span>
+                            </div>
+                            <div class="sna_content">
+                                <a href="product-view.html">
+                                    <h4>{{i.Name}}</h4>
+                                </a>
+                                <div class="ratprice">
+                                    <div class="price">
+                                        <span class="org_price">EG {{i.Price}}</span>
+                                        
+                                    </div>
+                                    <div class="rating">
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <div class="rating_star">
+                                                <span><i class="las la-star"></i></span>
+                                                <span><i class="las la-star"></i></span>
+                                                <span><i class="las la-star"></i></span>
+                                                <span><i class="las la-star"></i></span>
+                                                <span><i class="las la-star"></i></span>
+                                            </div>
+                                            <p class="rating_count">(150)</p>
                                         </div>
-                                        <p class="rating_count">(150)</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="product_adcart">
-                                <button class="default_btn">Add to cart</button>
+                                <div class="product_adcart">
+                                    <button class="default_btn">Add to cart</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single_new_arrive">
-                        <div class="sna_img">
-                            <img loading="lazy" class="prd_img" src="{% static 'assets/images/hd-monitor.png' %}" alt="product">
-                            <div class="prodcut_hovcont">
-                                <a href="javascript:void(0)" class="icon open_quickview" tabindex="0">
-                                   <i class="icon-search-left"></i>
-                                </a>
-                                <a href="#" class="icon" tabindex="0">
-                                    <i class="icon-heart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="sna_content">
-                            <a href="product-view.html">
-                                <h4>SAMSUNG 27" Class Curved</h4>
-                            </a>
-                            <div class="ratprice">
-                                <div class="price">
-                                    <span class="org_price">$45.00</span>
-                                    <span class="prev_price">$55.45</span>
-                                </div>
-                                <div class="rating">
-                                    <div class="d-flex align-items-center justify-content-start">
-                                        <div class="rating_star">
-                                            <span><i class="las la-star"></i></span>
-                                            <span><i class="las la-star"></i></span>
-                                            <span><i class="las la-star"></i></span>
-                                            <span><i class="las la-star"></i></span>
-                                            <span><i class="las la-star"></i></span>
-                                        </div>
-                                        <p class="rating_count">(150)</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_adcart">
-                                <button class="default_btn">Add to cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
+                
             </div>
         </div>
     </section>
