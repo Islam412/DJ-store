@@ -264,7 +264,7 @@
                             <i class="icon-heart"></i>
                         </span>
                         <span class="icon_text">Wish List</span>
-                        <span class="pops">6</span>
+                        <span class="pops"></span>
                     </a>
                     <div class="shopcart">
                         <a href="{% url 'cart' %}" class="icon_wrp text-center d-none d-lg-block">
@@ -272,45 +272,40 @@
                                 <i class="icon-cart"></i>
                             </span>
                             <span class="icon_text">Cart</span>
-                            <span class="pops">8</span>
+                            <span class="pops"></span>
                         </a>
                       
                     </div>
                     <div class="position-relative myacwrap">
-                        <a href="javascript:void(0)" class="icon_wrp text-center myacc">
+                        <a href="{% url 'user'  %}" class="icon_wrp text-center myacc">
                             <span class="icon">
-                               <i class="icon-user-line"></i>
+                               <i  class="icon-user-line"></i>
                             </span>
                             <span class="icon_text">Account</span>
                         </a>
                         <div class="myacc_cont">
                             <div class="ac_join">
-                                <p>Welcome to RAFCART Shop</p>
                                 <div class="account_btn d-flex justify-content-between">
-                                   <a href="{% url 'signup' %}" class="default_btn">Join</a>
+                                     {% if user.is_authenticated %}
+                                    <a href="{% url 'logout' %}" class="default_btn">Log out</a>
+                                    {% else %}
+                                    <a href="{% url 'signup' %}" class="default_btn">Join</a>
                                     <a href="{% url 'signin' %}" class="default_btn second">Sing in</a>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="ac_links">
-                                  <a href="account.html" class="myac">
+                                  <a href="{% url 'user'  %}" class="myac">
                                     <i class="lar la-id-card"></i>
                                     My Account
                                 </a>
-                               <a href="account-order-history.html">
-                                    <i class="las la-gift"></i>
-                                    My Order
-                                </a>
-                               <a href="wish-list.html">
+                               <a href="{% url 'wishlist_list'  %}">
                                     <i class="lar la-heart"></i>
                                     My Wishlist
                                 </a>
-                                <a href="shopping-cart.html">
+                                <a href="{% url 'cart'  %}">
                                      <i class="icon-cart"></i>
                                     My Cart
-                                </a>
-                                <a href="login.html">
-                                    <i class="las la-power-off"></i>
-                                    Log out
                                 </a>
                             </div>
                         </div>
@@ -514,10 +509,11 @@
                             <img loading="lazy" class="prd_img" src="{{i.Image.url}}" alt="product">
                                 <span class="tag">Hot</span>
                                 <div class="prodcut_hovcont">
-                                    <a href="javascript:void(0)" class="icon open_quickview" tabindex="0">
-                                    <i class="icon-search-left"></i>
                                     </a>
-                                    <a href="#" class="icon" tabindex="0">
+                                    <a href="{% url 'detail' i.id %}" class="icon open_quickview" tabindex="0">
+                                        <i class="icon-search-left"></i>
+                                    </a>
+                                    <a href="{% url 'add_to_wishlist' i.id %}" class="icon" tabindex="0">
                                         <i class="icon-heart"></i>
                                     </a>
                                 </div>
@@ -545,7 +541,7 @@
                                     </div>
                                 </div>
                                 <div class="product_adcart">
-                                    <button class="default_btn">Add to cart</button>
+                                    <button class="default_btn">Add to cart</button> 
                                 </div>
                             </div>
                         </div>

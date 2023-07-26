@@ -53,3 +53,6 @@ def signout(request):
     logout(request)
     # Redirect to a success page or any other appropriate view
     return redirect('/')
+
+def User(request):
+    return render(request,'account/account.html')

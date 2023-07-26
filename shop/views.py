@@ -85,3 +85,4 @@ def delete_wishlist_item(request, product_id):
     wishlist_items.delete()
     return redirect('wishlist_list') 
 
+
