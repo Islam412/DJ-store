@@ -41,7 +41,7 @@ class Cart(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Cart for {self.user.username}"
+        return f"Cart for {self.user.name}"
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
@@ -49,7 +49,7 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"{self.quantity} x {self.product.Name} in Cart for {self.cart.user.username}"
+        return f"{self.quantity} x {self.product.Name} in Cart for {self.cart.user.name}"
 
     
 
@@ -63,7 +63,7 @@ class Wishlist(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"wishlist for {self.user.username}"
+        return f"wishlist for {self.user.name}"
 
 class wishlistItem(models.Model):
     wishlist = models.ForeignKey(Wishlist, on_delete=models.CASCADE)
@@ -71,4 +71,4 @@ class wishlistItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"{self.quantity} x {self.product.Name} in wishlist for {self.wishlist.user.username}"
+        return f"{self.quantity} x {self.product.Name} in wishlist for {self.wishlist.user.name}"
