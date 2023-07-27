@@ -100,3 +100,16 @@ def checkout_view(request):
         total_price = 0.00
 
     return render(request, 'shop/checkout.html', {'cart_items': cart_items, 'total_price': total_price})
+
+
+
+def get_cart_items_count(user):
+    if user.is_authenticated:
+        return CartItem.objects.filter(cart__user=user).count()
+    return 0
+
+
+def get_wishlist_items_count(user):
+    if user.is_authenticated:
+        return wishlistItem.objects.filter(wishlist__user=user).count()
+    return 0

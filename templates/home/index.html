@@ -257,6 +257,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div class="header_icon d-flex align-items-center">
 
                     <a href="{% url 'wishlist_list'  %}" class="icon_wrp text-center wishlist ms-0">
@@ -264,18 +266,27 @@
                             <i class="icon-heart"></i>
                         </span>
                         <span class="icon_text">Wish List</span>
-                        <span class="pops"></span>
+                       
+                            <span class="pops">{{ wishlist_items_count }}</span>
+                    
                     </a>
-                    <div class="shopcart">
+
+                    <!-- Display the cart count icon and number -->
+                    <div class="header_icon d-flex align-items-center">
                         <a href="{% url 'cart' %}" class="icon_wrp text-center d-none d-lg-block">
                             <span class="icon">
                                 <i class="icon-cart"></i>
                             </span>
                             <span class="icon_text">Cart</span>
-                            <span class="pops"></span>
+                           
+                                <span class="pops">{{ cart_items_count }}</span>
+                           
+                               
+                            
                         </a>
-                      
+                        <!-- Add other header icons here -->
                     </div>
+
                     <div class="position-relative myacwrap">
                         <a href="{% url 'user'  %}" class="icon_wrp text-center myacc">
                             <span class="icon">
