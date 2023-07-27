@@ -86,3 +86,17 @@ def delete_wishlist_item(request, product_id):
     return redirect('wishlist_list') 
 
 
+
+
+def checkout_view(request):
+    user = request.user
+    cart = Cart.objects.filter(user=user).first()
+    
+    if cart:
+        cart_items = CartItem.objects.filter(cart=cart)
+        total_price = sum(item.product.Price * item.quantity for item in cart_items)
+    else:
+        cart_items = []
+        total_price = 0.00
+
+    return render(request, 'shop/checkout.html', {'cart_items': cart_items, 'total_price': total_price})
