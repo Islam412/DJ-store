@@ -1,17 +1,136 @@
-<!-- checkout.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="{% url 'home' %}"><i class="las la-home"></i></a>
+        <a href="#">Shop</a>
+        <a href="#" class="active">Checkout</a>
+      </div>
+    </div>
+     <div class="cart_area section_padding_b">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-8 col-lg-7 col-md-6">
+            <h4 class="shop_cart_title mb-4 ps-3">Billing details</h4>
+            <div class="billing_form">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="single_billing_inp">
+                    <label for="first_name">First Name <span>*</span></label>
+                    <input type="text" id="first_name" />
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="single_billing_inp">
+                    <label for="last_name">Last Name <span>*</span></label>
+                    <input type="text" id="last_name" />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="single_billing_inp">
+                    <label for="company_name">Company Name</label>
+                    <input type="text" id="company_name" />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="single_billing_inp">
+                    <label for="county_region"
+                      >County/Region <span>*</span></label
+                    >
+                    <input type="text" id="county_region" />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="single_billing_inp">
+                    <label for="street_addr"
+                      >Street Address <span>*</span></label
+                    >
+                    <input type="text" id="street_addr" />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="single_billing_inp">
+                    <label for="town_city">Town/City <span>*</span></label>
+                    <input type="text" id="town_city" />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="single_billing_inp">
+                    <label for="zip_code">Zip Code <span>*</span></label>
+                    <input type="text" id="zip_code" />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="single_billing_inp">
+                    <label for="phone_number"
+                      >Phone Number <span>*</span></label
+                    >
+                    <input type="text" id="phone_number" />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="single_billing_inp">
+                    <label for="email_addr">Email Address <span>*</span></label>
+                    <input type="text" id="email_addr" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-lg-5 col-md-6">
+            <h4 class="shop_cart_title ps-3">Your order</h4>
+            <div class="checkout_order mt-4">
+              <h4>product</h4>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Checkout</title>
-</head>
-<body>
-    <h1>Checkout</h1>
-    <ul>
-        {% for item in cart_items %}
-            <li>{{ item.product.Name }} - ${{ item.product.Price }} x {{ item.quantity }}</li>
-        {% endfor %}
-    </ul>
-    <p>Total Price: ${{ total_price }}</p>
-</body>
-</html>
+               {% for item in cart_items %}
+
+              <div class="single_check_order">
+                <div class="checkorder_cont">
+                  <h5>{{ item.product.Name }}</h5>
+                </div>
+                <p class="checkorder_qnty">x {{ item.quantity }}</p>
+                <p class="checkorder_price">EG{{ item.product.Price }}</p>
+              </div>
+              {% endfor %}
+
+              
+              <div class="single_check_order subs">
+                <div class="checkorder_cont subtotal-h">
+                  <h5>Subtotal</h5>
+                </div>
+                <p class="checkorder_price">$140.00</p>
+              </div>
+              <div class="single_check_order subs">
+                <div class="checkorder_cont subtotal-h">
+                  <h5>Shipping</h5>
+                </div>
+                <p class="checkorder_price">Free</p>
+              </div>
+              <div class="single_check_order total">
+                <div class="checkorder_cont">
+                  <h5>Total</h5>
+                </div>
+                <p class="checkorder_price">{{ total_price }}</p>
+              </div>
+              <div class="checkorder_agree custom_check check_2">
+                <input
+                  type="checkbox"
+                  class="check_inp"
+                  hidden
+                  id="save-default"
+                />
+                <label for="save-default"
+                  >Agree to our
+                  <a href="#" class="text-color">terms & conditions</a></label
+                >
+              </div>
+
+              <div class="checkorder_btn">
+                <button class="default_btn rounded w-100">place order</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock content %}
