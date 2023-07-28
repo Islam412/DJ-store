@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404, redirect
 from .models import Product,Cart, CartItem , Wishlist , wishlistItem , Order
 from django.views.generic import ListView,DeleteView,DetailView
+from django.contrib.auth.decorators import login_required
 from django import forms
 # Create your views here.
 
@@ -89,10 +90,14 @@ def delete_wishlist_item(request, product_id):
 
 
 
+
+
+
+@login_required
 def checkout_view(request):
     user = request.user
     cart = Cart.objects.filter(user=user).first()
-    
+
     if cart:
         cart_items = CartItem.objects.filter(cart=cart)
         total_price = sum(item.product.Price * item.quantity for item in cart_items)
@@ -114,16 +119,24 @@ def checkout_view(request):
                 'error_message': 'Please provide the customer name.',
             })
 
+        # Create an Order object and save it to the database
         order = Order.objects.create(customer_name=customer_name, email=email, address=address, Phone=phone)
-        order.save()
+        
+        for item in cart_items:
+            item.cart = None  # Unset the cart to avoid conflicting cart references
+            item.save()
+
+            # Associate the cart item with the order and set the cart to None
+            order.cartitem_set.create(product=item.product, quantity=item.quantity)
+
+        # Clear the user's cart after the order is placed
+        cart.delete()
+
         return redirect('confirm/')  # Replace 'confirm/' with the correct URL path
-    else:
-        form = None
 
     context = {
         'cart_items': cart_items,
         'total_price': total_price,
-        'form': form,
     }
 
     return render(request, 'shop/checkout.html', context)
