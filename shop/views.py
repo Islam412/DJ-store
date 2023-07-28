@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404, redirect
-from .models import Product,Cart, CartItem , Wishlist , wishlistItem
+from .models import Product,Cart, CartItem , Wishlist , wishlistItem , Order
 from django.views.generic import ListView,DeleteView,DetailView
+from django import forms
 # Create your views here.
 
 class ShopView(ListView):
@@ -99,7 +100,33 @@ def checkout_view(request):
         cart_items = []
         total_price = 0.00
 
-    return render(request, 'shop/checkout.html', {'cart_items': cart_items, 'total_price': total_price})
+    if request.method == 'POST':
+        customer_name = request.POST.get('customer_name')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
+
+        # Additional check to ensure customer_name is provided
+        if not customer_name:
+            return render(request, 'shop/checkout.html', {
+                'cart_items': cart_items,
+                'total_price': total_price,
+                'error_message': 'Please provide the customer name.',
+            })
+
+        order = Order.objects.create(customer_name=customer_name, email=email, address=address, Phone=phone)
+        order.save()
+        return redirect('confirm/')  # Replace 'confirm/' with the correct URL path
+    else:
+        form = None
+
+    context = {
+        'cart_items': cart_items,
+        'total_price': total_price,
+        'form': form,
+    }
+
+    return render(request, 'shop/checkout.html', context)
 
 
 
@@ -113,3 +140,11 @@ def get_wishlist_items_count(user):
     if user.is_authenticated:
         return wishlistItem.objects.filter(wishlist__user=user).count()
     return 0
+
+
+
+
+
+
+def order_confirmation(request):
+    return render(request, 'shop/confirm.html')
