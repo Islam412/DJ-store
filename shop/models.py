@@ -32,16 +32,6 @@ class Product(models.Model):
         return self.Name
     
 
-class Order(models.Model):
-    customer_name = models.CharField(max_length=100)
-    email = models.EmailField()
-    address = models.CharField(max_length=200)
-    Phone = models.CharField(max_length=20)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Order #{self.id} - {self.customer_name}"
-
 
 
 class Cart(models.Model):
@@ -50,6 +40,7 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"Cart for {self.user.name}"
+
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
@@ -62,8 +53,34 @@ class CartItem(models.Model):
 
 
 
-    
+class Order(models.Model):
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=20)
+    address = models.TextField()
+    email = models.EmailField()
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
+    def calculate_total_price(self):
+        total = 0
+        for item in self.order_items.all():  # Use the related name 'order_items' to access related OrderItem instances
+            total += item.total_price()
+        return total
+
+    def save(self, *args, **kwargs):
+        self.total_price = self.calculate_total_price()
+        super(Order, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f"Order ID: {self.pk}, Customer Name: {self.name}"
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, related_name='order_items', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)  # Replace 'Product' with your product model
+    quantity = models.PositiveIntegerField(default=1)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def total_price(self):
+        return self.quantity * self.price
 
 
 

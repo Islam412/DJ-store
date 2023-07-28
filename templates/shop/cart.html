@@ -33,7 +33,7 @@
                     <h5> {{ item.product.Name }}</h5>
                   </a>
                   <p class="price">{{ item.product.Price }}</p>
-                  <p class="size mb-0">Size: M</p>
+                  
                 </div>
                 <div class="cart_qnty d-flex align-items-center ms-md-auto">
                   <div class="cart_qnty_btn">
@@ -47,6 +47,7 @@
                 <div class="cart_price ms-auto">
                   <p>{{item.product.Price }}</p>
                 </div>
+                
                 <div class="cart_remove ms-auto">
                    <form action="{% url 'delete_cart_item' item.id %}" method="post">
                      {% csrf_token %}
@@ -81,6 +82,7 @@
               <div class="cart_sum_pros">
                  <a href="{% url 'checkout'  %}"> Proccees to checkout  </a> 
               </div>
+              
             </div>
           </div>
         </div>
