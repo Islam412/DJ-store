@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404, redirect
-from .models import Product,Cart, CartItem , Wishlist , wishlistItem  ,  Order, OrderItem
+from .models import Product,Cart, CartItem , Wishlist , wishlistItem   , Order
 from django.views.generic import ListView,DeleteView,DetailView
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from .utils import serialize_cart_items
 from django import forms
 # Create your views here.
 
@@ -24,35 +25,7 @@ class detail(DetailView):
     context_object_name = 'pro'
 
 
-def add_to_cart(request, product_id):
-    if request.user.is_authenticated:
-        cart, created = Cart.objects.get_or_create(user=request.user)
 
-        # Check if 'cart' key exists in the session, initialize it with an empty dictionary if not
-        if 'cart' not in request.session:
-            request.session['cart'] = {}
-
-        product = Product.objects.get(pk=product_id)
-
-        # Get the product name and quantity from the cart session if it exists
-        cart_product_info = request.session['cart'].get(str(product_id))
-
-        if cart_product_info:
-            cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-            cart_item.quantity += 1
-            cart_item.save()
-
-            # Increment the quantity in the cart session
-            cart_product_info[1] += 1
-        else:
-            cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-            cart_product_info = (product.Name, 1)
-
-        # Update the cart session with the product name and quantity
-        request.session['cart'][str(product_id)] = cart_product_info
-
-    return redirect('cart')
-'''
 
 def add_to_cart(request, product_id):
     if request.user.is_authenticated:
@@ -64,7 +37,7 @@ def add_to_cart(request, product_id):
             cart_item.save()
     return redirect('cart')
 
-'''
+
 
 def view_cart(request):
     if request.user.is_authenticated:
@@ -141,36 +114,52 @@ def order_confirmation(request):
     return render(request, 'shop/confirm.html')
 
 
+
+def calculate_total_price(cart_items):
+    total_price = 0
+    for cart_item in cart_items:
+        total_price += cart_item.product.Price * cart_item.quantity
+    return total_price
+
+
+
 def checkout(request):
-    if request.method == 'POST':
-        name = request.POST['name']
-        phone = request.POST['phone']
-        address = request.POST['address']
-        email = request.POST['email']
-        cart = request.session.get('cart', {})
+    if request.user.is_authenticated:
+        cart = Cart.objects.filter(user=request.user).first()
+        if cart:
+            cart_items = CartItem.objects.filter(cart=cart)
+            total_price = calculate_total_price(cart_items)
+        else:
+            cart_items = None
+            total_price = 0
 
-        # Wrap the checkout process in a transaction
-        with transaction.atomic():
-            order = Order(name=name, phone=phone, address=address, email=email)
-            order.save()  # Save the 'Order' instance to get a primary key value
+        if request.method == 'POST':
+            # Get the delivery information from the form
+            name = request.POST.get('name')
+            address = request.POST.get('address')
+            phone = request.POST.get('phone')
+            email = request.POST.get('email')
 
-            # Create a list to store OrderItem instances to save later
-            order_items_to_save = []
+            # Create an Order object and associate it with the user
+            order = Order.objects.create(
+                user=request.user,
+                name=name,
+                address=address,
+                phone=phone,
+                email=email,
+                total_price=total_price
+            )
+            
+            # Save the cart items in the order
+            order.save_cart_items(cart_items)
 
-            for product_id, quantity in cart.items():
-                product = Product.objects.get(pk=product_id)
-                order_item = OrderItem(order=order, product=product, quantity=quantity, price=product.Price)
-                order_items_to_save.append(order_item)
+            # Clear the cart after the order is placed
+            cart_items.delete()
 
-            # Save all the OrderItem instances in a single batch
-            OrderItem.objects.bulk_create(order_items_to_save)
+            return redirect('confirm/')  # Redirect to a thank-you page or order confirmation page
 
-            # Update the total price of the order based on the calculated value
-            order.total_price = order.calculate_total_price()
-            order.save()
+    else:
+        cart_items = None
+        total_price = 0
 
-            request.session['cart'] = {}  # Clear the cart after checkout
-
-        return redirect('order_detail', order_id=order.pk)  # Use 'pk' to access the primary key value
-
-    return render(request, 'shop/checkout.html')
+    return render(request, 'shop/checkout.html', {'cart_items': cart_items, 'total_price': total_price})
