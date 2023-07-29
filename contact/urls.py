@@ -1,7 +1,9 @@
 from django.urls import path
-from . views import contact
+from . import views
+
 
 
 urlpatterns = [
-    path('', contact.as_view(), name='contact'),
+    path('',views.send_massege, name='contact'),
+    
 ]

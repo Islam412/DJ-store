@@ -1,22 +1,7 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render
 from .models import Info
 from django.conf import settings
 from django.core.mail import send_mail
-from django.views.generic import ListView
-# Create your views here.
-
-'''
-def contact(request):
-    info = Info.objects.first()
-    return render(request,'contact.html',{'info':info})
-'''
-
-class contact(ListView):
-    model = Info
-    template_name = 'contact/contact.html'
-    context_object_name = 'info'
-
-
 
 
 def send_massege(request):
@@ -32,6 +17,6 @@ def send_massege(request):
             settings.EMAIL_HOST_USER,
             recipient_list,
         )
-
-    else:
-        return redirect('/')
+    
+    myinfo=Info.objects.first()
+    return render(request,'contact/contact.html',{'myinfo':myinfo})
