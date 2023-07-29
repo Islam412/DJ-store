@@ -134,13 +134,13 @@ def checkout(request):
             total_price = 0
 
         if request.method == 'POST':
-            # Get the delivery information from the form
+            # احصل على معلومات التوصيل من النموذج
             name = request.POST.get('name')
             address = request.POST.get('address')
             phone = request.POST.get('phone')
             email = request.POST.get('email')
 
-            # Create an Order object and associate it with the user
+            # أنشئ كائن الطلب (Order) واربطه بالمستخدم
             order = Order.objects.create(
                 user=request.user,
                 name=name,
@@ -149,14 +149,14 @@ def checkout(request):
                 email=email,
                 total_price=total_price
             )
-            
-            # Save the cart items in the order
+
+            # قم بحفظ عناصر سلة التسوق في الطلب
             order.save_cart_items(cart_items)
 
-            # Clear the cart after the order is placed
+            # قم بتفريغ سلة التسوق بعد تأكيد الطلب
             cart_items.delete()
 
-            return redirect('confirm/')  # Redirect to a thank-you page or order confirmation page
+            return redirect('confirm/')  # قم بتوجيه المستخدم إلى صفحة شكرًا أو تأكيد الطلب
 
     else:
         cart_items = None

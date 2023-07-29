@@ -7,7 +7,7 @@ def serialize_cart_items(cart_items):
         serialized_item = {
             'product_name': cart_item.product.Name,
             'quantity': cart_item.quantity,
-            'price': cart_item.product.Price,
+            'price': cart_item.Product.Price,
             # Add more fields as needed
         }
         serialized_items.append(serialized_item)

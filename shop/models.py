@@ -41,7 +41,7 @@ class Cart(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Cart for {self.user.username}"
+        return f"Cart for {self.user.name}"
 
 
 class CartItem(models.Model):
@@ -52,6 +52,7 @@ class CartItem(models.Model):
     def __str__(self):
         return f"{self.quantity} x {self.product.Name} in Cart for {self.cart}"
 
+
 class Order(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
@@ -59,19 +60,15 @@ class Order(models.Model):
     phone = models.CharField(max_length=20)
     email = models.EmailField()
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
-    cart_items = models.JSONField(default=list)  # Set a default value of an empty list
+    cart_items = models.ManyToManyField(CartItem)  # استخدم ManyToManyField لتخزين عناصر سلة التسوق
 
-    # Add any other fields you need for the order
-
-    def save_cart_items(self, cart_items):
-        self.cart_items = json.dumps([{
-            'product_name': item.product.Name,
-            'quantity': item.quantity,
-            'price': item.product.Price
-        } for item in cart_items])
+    # قم بإضافة أية حقول أخرى تحتاجها للطلب
 
     def __str__(self):
-        return self.cart_items
+        return f"الطلب رقم {self.pk} للسيد {self.name}"
+
+    def save_cart_items(self, cart_items):
+        self.cart_items.set(cart_items)
 
 
 
