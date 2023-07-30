@@ -4,7 +4,6 @@ from .models import Product,Cart, CartItem , Wishlist , wishlistItem   , Order
 from django.views.generic import ListView,DeleteView,DetailView
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from .utils import serialize_cart_items
 from django import forms
 # Create your views here.
 
@@ -13,7 +12,10 @@ class ShopView(ListView):
     template_name = 'shop/shop.html'
     context_object_name = 'pro'
     
-
+class Shop_grid_View(ListView):
+    model = Product
+    template_name = 'shop/grid.html'
+    context_object_name = 'pro'
 
 
 

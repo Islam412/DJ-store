@@ -3,8 +3,8 @@
 {% block content %}
     <div class="container">
       <div class="breadcrumbs">
-        <a href="index-1.html"><i class="las la-home"></i></a>
-        <a href="#" class="active">Shop</a>
+        <a href="{% url 'home' %}"><i class="las la-home"></i></a>
+        <a href="{% url 'grid' %}" class="active">Shop</a>
       </div>
     </div>
 
@@ -254,10 +254,10 @@
                 </select>
               </div>
               <div class="view_filter d-flex align-items-center ms-auto">
-                <a href="#">
+                <a href="{% url 'grid' %}">
                   <div class="view_icon"><i class="icon-grid"></i></div>
                 </a>
-                <a href="shop-list.html">
+                <a href="{% url 'shop' %}">
                   <div class="view_icon active">
                     <i class="las la-list-ul"></i>
                   </div>
