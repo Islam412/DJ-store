@@ -239,7 +239,7 @@
                                        <a href="{% url 'detail' product.id %}"> <img loading="lazy" src="{{product.Image.url}}" alt="product"> </a> 
                                     </div>
                                     <div class="sresult_content">
-                                        <h4>{{product.Name}}</h4>
+                                        <a  href="{% url 'detail' product.id %}" ><h4>{{product.Name}}</h4> </a>
                                         
                                     </div>
 
@@ -530,7 +530,7 @@
                                 </div>
                             </div>
                             <div class="sna_content">
-                                <a href="product-view.html">
+                                <a href="{% url 'detail' i.id %}">
                                     <h4>{{i.Name}}</h4>
                                 </a>
                                 <div class="ratprice">

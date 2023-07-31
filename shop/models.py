@@ -7,15 +7,26 @@ from account.models import CustomUser
 # Create your models here.
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=50, null=True)
+    image = models.ImageField(upload_to='category', null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class SubCategory(models.Model):
+    name = models.CharField(max_length=50, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+    
+
 class Product(models.Model):
 
 
-    choise=[
-    ('Laptop','Laptop'),
-    ('Computer','Computer'),
-    ('Phone','Phone'),
-    ('Screen','Screen'),
-    ]
+    
 
 
     Name = models.CharField(max_length=60)
@@ -24,7 +35,7 @@ class Product(models.Model):
     Image = models.ImageField(upload_to='images/')
     Availability = models.BooleanField(default=True)
     Color=ColorField(default='#000000')
-    Categore = models.CharField(max_length=50, choices=choise, blank=True, null=True)
+    Category=models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products",null=True)
     Brand = models.CharField(max_length=20,null=True)
 
 
