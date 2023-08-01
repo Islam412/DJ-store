@@ -1,23 +1,27 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404, redirect
-from .models import Product,Cart, CartItem , Wishlist , wishlistItem   , Order
+from .models import Product,Cart, CartItem , Wishlist , wishlistItem   , Order , Brand , Category
 from django.views.generic import ListView,DeleteView,DetailView
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django import forms
 # Create your views here.
 
-class ShopView(ListView):
-    model = Product
-    template_name = 'shop/shop.html'
-    context_object_name = 'pro'
-    
-class Shop_grid_View(ListView):
-    model = Product
-    template_name = 'shop/grid.html'
-    context_object_name = 'pro'
+
+def ShopView(request):
+    pro = Product.objects.all()
+    brand = Brand.objects.all()
+    category = Category.objects.all()
+    return render(request,'shop/shop.html',{'pro':pro,'brand':brand,'category':category})
 
 
+
+
+def Shop_grid_View(request):
+    pro = Product.objects.all()
+    brand = Brand.objects.all()
+    category = Category.objects.all()
+    return render(request,'shop/grid.html',{'pro':pro,'brand':brand,'category':category})
 
 
 

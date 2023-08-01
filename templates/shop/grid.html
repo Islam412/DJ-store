@@ -29,49 +29,39 @@
                         <div class="shop_filter">
                             <h4 class="filter_title">Categories</h4>
                             <div class="filter_list">
-                                <div class="custom_check d-flex align-items-center">
-                                    <input type="checkbox" class="check_inp" hidden id="cat-women" checked>
-                                    <label for="cat-women">Women</label>
-                                    <p class="mb-0 ms-auto">(16)</p>
-                                </div>
-                                <div class="custom_check d-flex align-items-center">
-                                    <input type="checkbox" class="check_inp" hidden id="cat-men">
-                                    <label for="cat-men">Men</label>
-                                    <p class="mb-0 ms-auto">(9)</p>
-                                </div>
-                                <div class="custom_check d-flex align-items-center">
-                                    <input type="checkbox" class="check_inp" hidden id="cat-shoes">
-                                    <label for="cat-shoes">Shoes</label>
-                                    <p class="mb-0 ms-auto">(19)</p>
-                                </div>
-                                <div class="custom_check d-flex align-items-center">
-                                    <input type="checkbox" class="check_inp" hidden id="cat-computer">
-                                    <label for="cat-computer">Computer</label>
-                                    <p class="mb-0 ms-auto">(35)</p>
-                                </div>
-                            </div>
+                                {% for category in  category %}
+                                    <div class="custom_check d-flex align-items-center">
+                                        <input
+                                            type="checkbox"
+                                            class="check_inp"
+                                            hidden
+                                            id="cat-women"
+                                            checked
+                                        />
+                                        <label for="cat-women">{{category.name}}</label>
+                                        <p class="mb-0 ms-auto">(16)</p>
+                                    </div>
+                            {% endfor %}
                         </div>
-                        <div class="shop_filter">
-                            <h4 class="filter_title">Brands</h4>
-                            <div class="filter_list">
-                                <div class="custom_check d-flex align-items-center">
-                                    <input type="checkbox" class="check_inp" hidden id="bnd-adidas" checked>
-                                    <label for="bnd-adidas">Adidas</label>
-                                </div>
-                                <div class="custom_check d-flex align-items-center">
-                                    <input type="checkbox" class="check_inp" hidden id="bnd-nike">
-                                    <label for="bnd-nike">Nike</label>
-                                </div>
-                                <div class="custom_check d-flex align-items-center">
-                                    <input type="checkbox" class="check_inp" hidden id="bnd-easy">
-                                    <label for="bnd-easy">Easy</label>
-                                </div>
-                                <div class="custom_check d-flex align-items-center">
-                                    <input type="checkbox" class="check_inp" hidden id="bnd-arong">
-                                    <label for="bnd-arong">Arong</label>
-                                </div>
+                    </div>
+                    <div class="shop_filter">
+                        <h4 class="filter_title">Brands</h4>
+                        <div class="filter_list">
+                        {% for brand in brand  %}
+                            <div class="custom_check d-flex align-items-center">
+                            <input
+                                type="checkbox"
+                                class="check_inp"
+                                hidden
+                                id="bnd-adidas"
+                                checked
+                            />
+                            <label for="bnd-adidas">{{brand.name}}</label>
                             </div>
+                        {% endfor %}
                         </div>
+                    </div>
+
                         <div class="shop_filter">
                             <h4 class="filter_title">Price</h4>
                             <div class="price-range-slider">
@@ -79,52 +69,6 @@
                                 <p class="range-value">
                                     <input type="text" id="amount" readonly>
                                 </p>
-                            </div>
-                        </div>
-                        <div class="shop_filter">
-                            <h4 class="filter_title">Size</h4>
-                            <div class="size_selector d-flex">
-                                <div class="single_size_opt">
-                                    <input type="radio" hidden name="size" class="size_inp" id="size-xs">
-                                    <label for="size-xs">XS</label>
-                                </div>
-                                <div class="single_size_opt ms-2">
-                                    <input type="radio" hidden name="size" class="size_inp" id="size-s">
-                                    <label for="size-s">S</label>
-                                </div>
-                                <div class="single_size_opt ms-2">
-                                    <input type="radio" hidden name="size" class="size_inp" id="size-m" checked>
-                                    <label for="size-m">M</label>
-                                </div>
-                                <div class="single_size_opt ms-2">
-                                    <input type="radio" hidden name="size" class="size_inp" id="size-l">
-                                    <label for="size-l">L</label>
-                                </div>
-                                <div class="single_size_opt ms-2">
-                                    <input type="radio" hidden name="size" class="size_inp" id="size-xl">
-                                    <label for="size-xl">XL</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="shop_filter border-bottom-0 pb-0 mb-0">
-                            <h4 class="filter_title">Color</h4>
-                            <div class="size_selector color_selector d-flex align-items-center">
-                                <div class="single_size_opt">
-                                    <input type="radio" hidden name="color" class="size_inp" id="color-purple">
-                                    <label for="color-purple" class="bg-color" data-bs-toggle="tooltip"
-                                        title="Rose Red"></label>
-                                </div>
-                                <div class="single_size_opt ms-2">
-                                    <input type="radio" hidden name="color" class="size_inp" id="color-red">
-                                    <label for="color-red" class="bg-white" data-bs-toggle="tooltip"
-                                        title="White"></label>
-                                </div>
-                                <div class="single_size_opt ms-2">
-                                    <input type="radio" hidden name="color" class="size_inp" id="color-green"
-                                        checked>
-                                    <label for="color-green" class="bg-dark" data-bs-toggle="tooltip"
-                                        title="Black"></label>
-                                </div>
                             </div>
                         </div>
                     </div>
