@@ -31,16 +31,13 @@
               <div class="shop_filter">
                 <h4 class="filter_title">Categories</h4>
                 <div class="filter_list">
-                  {% for category in  category %}
+                  {% for cat in  category %}
                     <div class="d-flex align-items-center">
 
-                      <input
-                        type="checkbox"
-                        checked
-                      />
+                    
 
-                      <label for="cat-women">{{category.name}}</label>
-                      <p class="mb-0 ms-auto">(16)</p>
+                      <a href="{% url 'shop_by_category' cat.id %}" ><label for="cat-women">{{cat.name}}</label></a>
+                      <p class="mb-0 ms-auto">({{ cat.product_count }})</p>
                     </div>
                   {% endfor %}
                 </div>
@@ -123,7 +120,7 @@
                     </div>
                     <div class="col-md-8">
                       <div class="product_content">
-                        <a href="product-view.html">
+                        <a href="{% url 'detail' pro.id %}">
                           <h5>{{pro.Name}}</h5>
                         </a>
                         <div class="ratprice">

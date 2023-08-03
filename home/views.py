@@ -6,7 +6,7 @@ def product_search_view(request):
     cart_items_count = get_cart_items_count(request.user)
     wishlist_items_count = get_wishlist_items_count(request.user)
     search_query = request.GET.get('search_query')
-    products = Product.objects.all()
+    products = Product.objects.all()[:4]
     pro = Product.objects.all()[:4]
     if search_query:
         products = products.filter(Name__icontains=search_query)

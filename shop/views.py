@@ -5,14 +5,20 @@ from django.views.generic import ListView,DeleteView,DetailView
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django import forms
+from django.db.models import Count
 # Create your views here.
 
 
-def ShopView(request):
+def ShopView(request, category_id=None):
     pro = Product.objects.all()
     brand = Brand.objects.all()
-    category = Category.objects.all()
-    return render(request,'shop/shop.html',{'pro':pro,'brand':brand,'category':category})
+    category = Category.objects.annotate(product_count=Count('products'))
+
+    if category_id:
+        pro = pro.filter(Category_id=category_id)
+
+    return render(request, 'shop/shop.html', {'pro': pro, 'brand': brand, 'category': category})
+
 
 
 
