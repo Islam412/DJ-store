@@ -19,20 +19,15 @@
               </div>
 
 
-              <div class="shop_filter d-block d-sm-none">
-                  <h4 class="filter_title">Sort by</h4>
-                  <div class="nice-select">
-                      <div class="sort-option">
-                          <a href="{% url 'shop' %}" class="sort-link">Default sorting</a>
-                      </div>
-                      <div class="sort-option">
-                          <a href="{% url 'shop' %}?sort_by=price_high" class="sort-link">Sort by Price (High to Low)</a>
-                      </div>
-                      <div class="sort-option">
-                          <a href="{% url 'shop' %}?sort_by=price_low" class="sort-link">Sort by Price (Low to High)</a>
-                      </div>
+                  <div class="shop_filter d-block d-sm-none">
+                    <h4 class="filter_title">Sort by</h4>
+                    <div class="nice-select">
+                      <a href="{% url 'shop' %}" class="sort-option">Default sorting</a>
+                      <a href="{% url 'shop' %}?sort_by=price_high" class="sort-option">Sort by Price (High to Low)</a>
+                      <a href="{% url 'shop' %}?sort_by=price_low" class="sort-option">Sort by Price (Low to High)</a>
+                    </div>
                   </div>
-              </div>
+
 
 
 
@@ -46,6 +41,20 @@
                       <p class="mb-0 ms-auto">({{ cat.product_count }})</p>
                     </div>
                   {% endfor %}
+                </div>
+              </div>
+
+              
+              <div class="shop_filter">
+                <h4 class="filter_title">Default sorting</h4>
+                <div class="filter_list">
+                  <div class="d-flex align-items-center">
+                    <a href="{% url 'shop' %}"><label for="cat-women">Default sorting</label></a>
+                    <a href="{% url 'shop' %}?sort_by=price_high" ><label for="cat-women"> high to Low</label></a>
+                    <a href="{% url 'shop' %}?sort_by=price_low"><label for="cat-women">low to High</label></a>
+
+                  </div>
+                  
                 </div>
               </div>
               
@@ -174,6 +183,8 @@
         </div>
       </div>
     </div>
+
+
 
 
 

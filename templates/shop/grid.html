@@ -15,16 +15,7 @@
                 <div class="col-xl-3 col-lg-4 position-relative">
                     <div class="filter_box py-3 px-3 shadow_sm">
                         <div class="close_filter d-block d-lg-none"><i class="las la-times"></i></div>
-                        <div class="shop_filter d-block d-sm-none">
-                            <h4 class="filter_title">Sort by</h4>
-                            <div class="sorting_filter mb-2">
-                                <select class="nice_select">
-                                    <option value="">Default sorting</option>
-                                    <option value="">Price low-high</option>
-                                    <option value="">Price high-low</option>
-                                </select>
-                            </div>
-                        </div>
+                      
 
                         <div class="shop_filter">
                             <h4 class="filter_title">Categories</h4>
@@ -36,6 +27,11 @@
                                     </div>
                                 {% endfor %}
                         </div>
+
+
+
+                        
+                    </div>
                     </div>
                    
 
@@ -48,6 +44,18 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="shop_filter">
+                            <h4 class="filter_title">Default sorting</h4>
+                            <div class="filter_list">
+                            <div class="d-flex align-items-center">
+                                <a href="{% url 'grid' %}"><label for="cat-women">Default sorting</label></a>
+                                <a href="{% url 'grid' %}?sort_by=price_high" ><label for="cat-women"> high to Low</label></a>
+                                <a href="{% url 'grid' %}?sort_by=price_low"><label for="cat-women">low to High</label></a>
+
+                            </div>
+                            
+                        </div>
+
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-8">
@@ -55,13 +63,7 @@
                         <div class="d-block d-lg-none">
                             <button class="default_btn py-2 me-3 rounded" id="mobile_filter_btn">Filter</button>
                         </div>
-                        <div class="sorting_filter d-none d-sm-block">
-                            <select class="nice_select">
-                                <option value="">Default sorting</option>
-                                <option value="">Price low-high</option>
-                                <option value="">Price high-low</option>
-                            </select>
-                        </div>
+                       
                         <div class="view_filter d-flex align-items-center ms-auto">
                             <a href="{% url 'grid' %}">
                                 <div class="view_icon active"><i class="icon-grid"></i></div>
