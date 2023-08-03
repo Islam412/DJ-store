@@ -9,15 +9,21 @@ from django.db.models import Count
 # Create your views here.
 
 
-def ShopView(request, category_id=None,Brand_id=None):
+def ShopView(request, category_id=None):
+    sort_by = request.GET.get('sort_by', '')  # Get the sorting parameter from the URL query string
     pro = Product.objects.all()
     category = Category.objects.annotate(product_count=Count('products'))
 
     if category_id:
         pro = pro.filter(Category_id=category_id)
-       
+
+    if sort_by == 'price_high':
+        pro = pro.order_by('-Price')  # Sorting by price high to low
+    elif sort_by == 'price_low':
+        pro = pro.order_by('Price')   # Sorting by price low to high
 
     return render(request, 'shop/shop.html', {'pro': pro, 'category': category})
+
 
 
 
