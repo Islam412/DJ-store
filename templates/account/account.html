@@ -65,7 +65,7 @@
                   <a href="account-voucher.html">Voucher</a>
                 </div>
                 <div class="acprof_links">
-                  <a href="wish-list.html">
+                  <a href="{% url 'wishlist_list'  %}">
                     <h4 class="ac_link_title">
                       <i class="lar la-heart"></i>
                       My Wishlist
@@ -73,7 +73,7 @@
                   </a>
                 </div>
                 <div class="acprof_links border-0">
-                  <a href="login.html">
+                  <a  href="{% url 'logout' %}">
                     <h4 class="acprof_link_title">
                       <i class="las la-power-off"></i>
                       Log Out
