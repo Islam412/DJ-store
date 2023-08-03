@@ -33,29 +33,13 @@
                 <div class="filter_list">
                   {% for cat in  category %}
                     <div class="d-flex align-items-center">
-
-                    
-
                       <a href="{% url 'shop_by_category' cat.id %}" ><label for="cat-women">{{cat.name}}</label></a>
                       <p class="mb-0 ms-auto">({{ cat.product_count }})</p>
                     </div>
                   {% endfor %}
                 </div>
               </div>
-              <div class="shop_filter">
-                <h4 class="filter_title">Brands</h4>
-                <div class="filter_list">
-                  {% for brand in brand  %}
-                    <div class=" d-flex align-items-center">
-                      <input
-                        type="checkbox"
-                        checked
-                      />
-                      <label for="bnd-adidas">{{brand.name}}</label>
-                    </div>
-                  {% endfor %}
-                </div>
-              </div>
+            
 
 
 

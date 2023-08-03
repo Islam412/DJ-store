@@ -9,25 +9,29 @@ from django.db.models import Count
 # Create your views here.
 
 
-def ShopView(request, category_id=None):
+def ShopView(request, category_id=None,Brand_id=None):
     pro = Product.objects.all()
-    brand = Brand.objects.all()
     category = Category.objects.annotate(product_count=Count('products'))
 
     if category_id:
         pro = pro.filter(Category_id=category_id)
+       
 
-    return render(request, 'shop/shop.html', {'pro': pro, 'brand': brand, 'category': category})
-
-
-
+    return render(request, 'shop/shop.html', {'pro': pro, 'category': category})
 
 
-def Shop_grid_View(request):
+
+
+
+def Shop_grid_View(request,category_id=None,Brand_id=None):
     pro = Product.objects.all()
-    brand = Brand.objects.all()
-    category = Category.objects.all()
-    return render(request,'shop/grid.html',{'pro':pro,'brand':brand,'category':category})
+    category = Category.objects.annotate(product_count=Count('products'))
+
+    if category_id:
+        pro = pro.filter(Category_id=category_id)
+        
+
+    return render(request, 'shop/grid.html', {'pro': pro, 'category': category})
 
 
 
