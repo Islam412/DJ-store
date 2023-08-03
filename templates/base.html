@@ -53,8 +53,72 @@
         </div>
     </header>
    
+     <div class="mobile_bottombar d-block d-lg-none">
+        <div class="header_icon">
+            <a href="javascript:void(0)" class="icon_wrp text-center open_menu">
+                        <span class="icon">
+                            <i class="las la-bars"></i>
+                        </span>
+                <span class="icon_text">Menu</span>
+            </a>
+            <a href="javascript:void(0)" class="icon_wrp text-center open_category">
+                        <span class="icon">
+                           <i class="icon-list-ul"></i>
+                        </span>
+                <span class="icon_text">Categories</span>
+            </a>
+            <a href="javascript:void(0)" class="icon_wrp text-center" id="src_icon">
+                        <span class="icon">
+                           <i class="icon-search-left"></i>
+                        </span>
+                <span class="icon_text">Search</span>
+            </a>
+            <a href="{% url 'cart' %}" class="icon_wrp crt text-center" id="openCart">
+                        <span class="icon">
+                            <i class="icon-cart"></i>
+                        </span>
+                <span class="icon_text">Cart</span>
+                <span class="pops">8</span>
+            </a>
+        </div>
+    </div>
+     <div class="mobile_menwrap d-lg-none" id="mobile_menwrap">
+        <div class="mobile_menu_2">
+            <h5 class="mobile_title">
+                Menu
+                <span class="sidebarclose" id="menuclose">
+                            <i class="las la-times"></i>
+                        </span>
+            </h5>
+            <ul>
+                <li class="withsub">
+                    <a href="{% url 'home' %}">
+                        Home
+                    </a>
+                 
+                </li>
 
-
+                <li class="withsub">
+                    <a href="{% url 'shop' %}">
+                        Shop
+                    </a>
+                    <
+                </li>
+                <li class="withsub">
+                    <a href="javascript:void(0)">
+                        My Account
+                    </a>
+                    <div class="submn">
+                        <a href="account.html">My account</a>
+                        <a href="login.html">Login</a>
+                        <a href="register.html">Register</a>
+                        <a href="forgot-password.html">Forgot password</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
     
 
     {% block content %}
