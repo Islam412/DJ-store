@@ -22,7 +22,7 @@
                             <div class="filter_list">
                                  {% for cat in  category %}
                                     <div class="d-flex align-items-center">
-                                        <a href="{% url 'shop_by_category' cat.id %}" ><label for="cat-women">{{cat.name}}</label></a>
+                                        <a href="{% url 'grid_by_category' cat.id %}" ><label for="cat-women">{{cat.name}}</label></a>
                                         <p class="mb-0 ms-auto">({{ cat.product_count }})</p>
                                     </div>
                                 {% endfor %}
