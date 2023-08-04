@@ -19,44 +19,45 @@
               <span>Total Price</span>
             </h4>
             <div class="shop_cart_wrap">
-               {% for item in cart_items %}
-              <div class="single_shop_cart d-flex align-items-center flex-wrap">
-                <div class="cart_img mb-4 mb-md-0">
-                  <img
-                    loading="lazy"
-                    src="{{ item.product.Image.url }}"
-                    alt="product"
-                  />
-                </div>
-                <div class="cart_cont">
-                  <a href="product-view.html">
-                    <h5> {{ item.product.Name }}</h5>
-                  </a>
-                  <p class="price">{{ item.product.Price }}</p>
-                  
-                </div>
-                <div class="cart_qnty d-flex align-items-center ms-md-auto">
-                  <div class="cart_qnty_btn">
-                    <i class="las la-minus"></i>
-                  </div>
-                  <div class="cart_count">{{ item.quantity }}</div>
-                  <div class="cart_qnty_btn">
-                    <i class="las la-plus"></i>
-                  </div>
-                </div>
-                <div class="cart_price ms-auto">
-                  <p>{{item.product.Price }}</p>
-                </div>
-                
-                <div class="cart_remove ms-auto">
-                   <form action="{% url 'delete_cart_item' item.id %}" method="post">
-                     {% csrf_token %}
-                    <button type="submit"> <i class="icon-trash"></i> </button> 
-                    </form>
 
-                </div>
-              </div>
+
+                {% for item in cart_items %}
+                  <div class="single_shop_cart d-flex align-items-center flex-wrap">
+                      <div class="cart_img mb-4 mb-md-0">
+                          <img loading="lazy" src="{{ item.product.Image.url }}" alt="product" />
+                      </div>
+                      <div class="cart_cont">
+                          <a href="product-view.html">
+                              <h5>{{ item.product.Name }}</h5>
+                          </a>
+                          <p class="price">{{ item.product.Price }}</p>
+                      </div>
+                      <div class="cart_qnty d-flex align-items-center ms-md-auto">
+                          <form method="post" action="{% url 'add_to_cart' product_id=item.product.id %}">
+                              {% csrf_token %}
+                              <select name="quantity" class="cart_select">
+                                  {% for i in "12345678910" %}
+                                      <option value="{{ i }}" {% if i == item.quantity %}selected{% endif %}>{{ i }}</option>
+                                  {% endfor %}
+                              </select>
+                          </form>
+                      </div>
+                      <div class="cart_price ms-auto">
+                          <p>{{ item.product.Price }}</p>
+                      </div>
+                      <div class="cart_remove ms-auto">
+                          <form action="{% url 'delete_cart_item' item.id %}" method="post">
+                              {% csrf_token %}
+                              <button type="submit"> <i class="icon-trash"></i> </button>
+                          </form>
+                      </div>
+                  </div>
               {% endfor %}
+
+
+
+
+              
 
             </div>
           </div>
@@ -88,4 +89,7 @@
         </div>
       </div>
     </div>
+
+
+
 {% endblock content %}

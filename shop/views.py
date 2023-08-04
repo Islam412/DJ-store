@@ -97,9 +97,22 @@ def view_cart(request):
             cart_items = CartItem.objects.filter(cart=cart)
         else:
             cart_items = None
+
+        if request.method == 'POST':
+            item_id = request.POST.get('item_id')
+            new_quantity = int(request.POST.get('quantity', 1))  # Default to 1 if not provided
+            cart_item = CartItem.objects.get(id=item_id)
+
+            if new_quantity > 0:
+                cart_item.quantity = new_quantity
+                cart_item.save()
+
+        # Create a list of numbers from 1 to 10 for the quantity dropdown
+        quantity_choices = list(range(1, 11))
+
+        return render(request, 'shop/cart.html', {'cart_items': cart_items, 'quantity_choices': quantity_choices})
     else:
-        cart_items = None
-    return render(request, 'shop/cart.html', {'cart_items': cart_items})
+        return render(request, 'shop/cart.html', {'cart_items': None})
 
 
 def delete_cart_item(request, id):
