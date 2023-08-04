@@ -30,20 +30,18 @@
                           <a href="product-view.html">
                               <h5>{{ item.product.Name }}</h5>
                           </a>
-                          <p class="price">{{ item.product.Price }}</p>
+                          
                       </div>
                       <div class="cart_qnty d-flex align-items-center ms-md-auto">
                           <form method="post" action="{% url 'add_to_cart' product_id=item.product.id %}">
                               {% csrf_token %}
-                              <select name="quantity" class="cart_select">
-                                  {% for i in "12345678910" %}
-                                      <option value="{{ i }}" {% if i == item.quantity %}selected{% endif %}>{{ i }}</option>
-                                  {% endfor %}
-                              </select>
+                              <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                              
                           </form>
                       </div>
+
                       <div class="cart_price ms-auto">
-                          <p>{{ item.product.Price }}</p>
+                          
                       </div>
                       <div class="cart_remove ms-auto">
                           <form action="{% url 'delete_cart_item' item.id %}" method="post">

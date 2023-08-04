@@ -77,16 +77,22 @@ def detail(request, pk):
     return render(request, 'shop/detail.html', {'pro': pro, 'color_name': color_name})
 
 
-
 def add_to_cart(request, product_id):
     if request.user.is_authenticated:
         cart, created = Cart.objects.get_or_create(user=request.user)
         product = Product.objects.get(pk=product_id)  # Replace with your product model
         cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+        
+        # Check if the cart item was created and not already in the cart
         if not created:
-            cart_item.quantity += 1
+            if cart_item.quantity == 0:
+                cart_item.quantity = 1
+            else:
+                cart_item.quantity += 1
             cart_item.save()
+
     return redirect('cart')
+
 
 
 
@@ -189,27 +195,20 @@ def calculate_total_price(cart_items):
 
 def checkout(request):
     if request.user.is_authenticated:
-        # التحقق مما إذا كان المستخدم مسجل الدخول أم لا
         cart = Cart.objects.filter(user=request.user).first()
         if cart:
-            # إذا كان هناك سلة تسوق مرتبطة بالمستخدم
-            # استرجاع عناصر السلة من قاعدة البيانات
             cart_items = CartItem.objects.filter(cart=cart)
-            # احتساب السعر الإجمالي للعناصر في السلة
             total_price = calculate_total_price(cart_items)
         else:
-            # إذا لم يكن هناك سلة تسوق، اجعل قائمة العناصر فارغة والسعر الإجمالي صفر
             cart_items = None
             total_price = 0
 
         if request.method == 'POST':
-            # استلام معلومات التوصيل من النموذج
             name = request.POST.get('name')
             address = request.POST.get('address')
             phone = request.POST.get('phone')
             email = request.POST.get('email')
 
-            # إنشاء كائن طلب وربطه بالمستخدم ومعلومات التوصيل
             order = Order.objects.create(
                 user=request.user,
                 name=name,
@@ -219,19 +218,19 @@ def checkout(request):
                 total_price=total_price
             )
 
-            # حفظ عناصر السلة في الطلب
-            order.save_cart_items(cart_items)
+            for item in cart_items:
+                new_quantity = int(request.POST.get(f'quantity_{item.id}', 1))
+                if new_quantity > 0:
+                    cart_item = CartItem.objects.get(id=item.id)
+                    cart_item.quantity = new_quantity
+                    cart_item.save()
+                    order.cart_items.add(cart_item)
 
-            # حذف عناصر السلة بعد تأكيد الطلب
             cart_items.delete()
-
-            # إعادة توجيه المستخدم إلى صفحة تأكيد الطلب
-            return redirect('confirm/') 
+            return redirect('confirm/')
 
     else:
-        # إذا لم يكن المستخدم مسجل الدخول، اجعل قائمة العناصر فارغة والسعر الإجمالي صفر
         cart_items = None
         total_price = 0
 
-    # عرض صفحة الدفع مع معلومات السلة والسعر الإجمالي
     return render(request, 'shop/checkout.html', {'cart_items': cart_items, 'total_price': total_price})
