@@ -28,14 +28,15 @@ def ShopView(request, category_id=None):
 
 
 
-def Shop_grid_View(request, category_id=None):
+def Shop_grid_View(request, category_id=None,sub_id=None):
     sort_by = request.GET.get('sort_by', '')  # Get the sorting parameter from the URL query string
     pro = Product.objects.all()
     subCategory = SubCategory.objects.annotate(product_count=Count('products'))
     if category_id:
         subCategory = subCategory.filter(category_id=category_id)
         pro = pro.filter(Category_id=category_id)
-
+    if sub_id:
+        pro = pro.filter(SubCategory = sub_id)
 
     if sort_by == 'price_high':
         pro = pro.order_by('-Price')  # Sorting by price high to low

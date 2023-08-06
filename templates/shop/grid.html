@@ -16,17 +16,19 @@
                     <div class="filter_box py-3 px-3 shadow_sm">
                         <div class="close_filter d-block d-lg-none"><i class="las la-times"></i></div>
                       
-
                         <div class="shop_filter">
                             <h4 class="filter_title">SUB Categories</h4>
                             <div class="filter_list">
                                  {% for cat in  subCategory %}
                                     <div class="d-flex align-items-center">
-                                        <a href="{% url 'grid_by_category' cat.id %}" ><label for="cat-women">{{cat.name}}</label></a>
+                                        <a href="{% url 'grid_by_subcategory' category_id=cat.category_id sub_id=cat.id %}" ><label for="cat-women">{{cat.name}}</label></a>
                                         <p class="mb-0 ms-auto">({{ cat.product_count }})</p>
                                     </div>
                                 {% endfor %}
+                            
                         </div>
+                        
+
 
 
 
