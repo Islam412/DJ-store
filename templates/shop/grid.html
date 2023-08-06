@@ -18,9 +18,9 @@
                       
 
                         <div class="shop_filter">
-                            <h4 class="filter_title">Categories</h4>
+                            <h4 class="filter_title">SUB Categories</h4>
                             <div class="filter_list">
-                                 {% for cat in  category %}
+                                 {% for cat in  subCategory %}
                                     <div class="d-flex align-items-center">
                                         <a href="{% url 'grid_by_category' cat.id %}" ><label for="cat-women">{{cat.name}}</label></a>
                                         <p class="mb-0 ms-auto">({{ cat.product_count }})</p>

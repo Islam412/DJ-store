@@ -11,7 +11,7 @@ class Category(models.Model):
         return self.name
 #____________________________________________________
 class SubCategory(models.Model):
-    name = models.CharField(max_length=50, null=True)
+    name= models.CharField(max_length=50, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
