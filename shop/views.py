@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404, redirect
-from .models import Product,Cart, CartItem , Wishlist , wishlistItem   , Order , Brand , Category
+from .models import Product,Cart, CartItem , Wishlist , wishlistItem   , Order , Brand , Category,SubCategory
 from django.views.generic import ListView,DeleteView,DetailView
 from django.contrib.auth.decorators import login_required
 from django.db import transaction

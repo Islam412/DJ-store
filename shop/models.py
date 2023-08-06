@@ -7,8 +7,6 @@ from account.models import CustomUser
 #_________________________________________
 class Category(models.Model):
     name = models.CharField(max_length=50, null=True)
-    image = models.ImageField(upload_to='category', null=True)
-
     def __str__(self):
         return self.name
 #____________________________________________________
@@ -21,6 +19,7 @@ class SubCategory(models.Model):
 #________________________________________________________
 class Brand(models.Model):
     name = models.CharField(max_length=100)
+    logo = models.ImageField(upload_to='logo/',null=True)
     def __str__(self):
         return self.name
 #_____________________________________________________
@@ -31,7 +30,8 @@ class Product(models.Model):
     Image = models.ImageField(upload_to='images/')
     Availability = models.BooleanField(default=True)
     Color=ColorField(default='#000000')
-    Category=models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products",null=True)
+    Category=models.ForeignKey(Category, on_delete=models.SET_NULL, related_name="products",null=True)
+    SubCategory=models.ForeignKey(SubCategory, on_delete=models.SET_NULL, related_name="products",null=True)
     Brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name="Brand_Product",null=True)
     def __str__(self):
         return self.Name

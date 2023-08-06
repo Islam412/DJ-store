@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from shop.models import Product,Category
+from shop.models import Product,Category,SubCategory
 from shop.views import get_cart_items_count  ,   get_wishlist_items_count 
 from django.db.models import Count
 
@@ -49,7 +49,7 @@ def product_search_view(request):
         'pro': pro,
         'cart_items_count': cart_items_count,
         'wishlist_items_count': wishlist_items_count,
-        'categories': Category.objects.annotate(product_count=Count('products')),
+        'categories':Category.objects.annotate(product_count=Count('products')),
     }
 
     return render(request, 'home/index.html', context)
