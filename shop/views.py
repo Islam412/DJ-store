@@ -33,8 +33,9 @@ def Shop_grid_View(request, category_id=None):
     pro = Product.objects.all()
     subCategory = SubCategory.objects.annotate(product_count=Count('products'))
     if category_id:
-        pro = pro.filter(Category_id=category_id)
         subCategory = subCategory.filter(category_id=category_id)
+        pro = pro.filter(Category_id=category_id)
+
 
     if sort_by == 'price_high':
         pro = pro.order_by('-Price')  # Sorting by price high to low
