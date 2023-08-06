@@ -3,9 +3,9 @@ from .views import ShopView,detail ,  Shop_grid_View , detail
 from . import views
 
 urlpatterns = [
-    path('', ShopView, name='shop'),
+    path('', Shop_grid_View, name='shop'),
     path('category/<int:category_id>/', views.ShopView, name='shop_by_category'),
-    path('grid', Shop_grid_View, name='grid'),
+    path('list', ShopView, name='grid'),
     path('grid/category/<int:category_id>/', views.Shop_grid_View, name='grid_by_category'),
     path('<int:pk>',detail,name='detail'),
     path('cart/', views.view_cart, name='cart'),
