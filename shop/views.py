@@ -1,12 +1,12 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404, redirect
-from .models import Product,Cart, CartItem , Wishlist , wishlistItem   , Order , Brand , Category,SubCategory
+from .models import Product,Cart, CartItem , Wishlist , wishlistItem   , Order , Brand , Category,SubCategory,Review
 from django.views.generic import ListView,DeleteView,DetailView
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django import forms
 from django.db.models import Count
-from .forms import AddProductForm
+from .forms import AddProductForm,AddReviewForm
 # Create your views here.
 
 
@@ -71,13 +71,36 @@ COLOR_MAP = {
     # Add more color mappings here
 }
 
-def detail(request, pk):
-    pro = Product.objects.get(id=pk)
 
+
+def detail(request, pk):
+    pro = get_object_or_404(Product, id=pk)
+    
     color_code = pro.Color
     color_name = COLOR_MAP.get(color_code, 'Unknown Color')
+    
+    # Fetch existing reviews for the product
+    reviews = Review.objects.filter(paroduct=pro)
 
-    return render(request, 'shop/detail.html', {'pro': pro, 'color_name': color_name})
+    if request.method == 'POST':
+        review_form = AddReviewForm(request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.product = pro
+            review.user = request.user
+            review.save()
+            # Redirect back to the detail page after adding the review
+            return redirect('detail', pk=pk)
+    else:
+        review_form = AddReviewForm()
+
+    return render(request, 'shop/detail.html', {
+        'pro': pro,
+        'color_name': color_name,
+        'reviews': reviews,
+        'review_form': review_form,
+    })
+
 
 
 def add_to_cart(request, product_id):
@@ -261,5 +284,6 @@ def add_product(request):
         form = AddProductForm()
 
     return render(request, 'shop/add_product.html', {'form': form})
+
 
 

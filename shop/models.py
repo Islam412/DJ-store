@@ -88,6 +88,7 @@ class wishlistItem(models.Model):
 #___________________________________________________________________________________________
 
 class Review(models.Model):
+    user = models.ForeignKey(CustomUser,on_delete=models.SET_NULL,related_name='review_user',null=True,blank=True)
     paroduct = models.ForeignKey(Product,on_delete=models.SET_NULL,related_name='review_product',null=True,blank=True)
     content = models.TextField(max_length=20000)
     date = models.DateField(default=timezone.now)

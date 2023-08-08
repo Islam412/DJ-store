@@ -105,242 +105,29 @@
                 </div>
             </div>
             <div class="product_view_tabs mt-4">
+                
                 <div class="pv_tab_buttons" class="spec_text">
-                    <div class="pbt_single_btn active" data-target=".info">Product Info</div>
-                    <div class="pbt_single_btn" data-target=".qna">Question & Answer</div>
-                    <div class="pbt_single_btn" data-target=".review">Review (10)</div>
+                    <div class="pbt_single_btn activ" data-target=".review">Review ({{pro.review_product.all |length}})</div>
                 </div>
-                <div class="pb_tab_content info active">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <div class="pbt_info_text">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est nec condimentum lorem
-                                    lacus. Lectus
-                                    libero in vulputate quis massa nisl risus, libero ut. Morbi praesent ipsum sed morbi
-                                    turpis sed.
-                                    Amet
-                                    sed fames fermentum, augue dignissim. Montes, velit velit eu gravida nibh in
-                                    feugiat.
-                                </p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est nec condimentum lorem
-                                    lacus.
-                                    Lectus
-                                    libero in vulputate quis massa nisl risus, libero ut. Morbi praesent ipsum sed morbi
-                                    turpis sed.
-                                    Amet
-                                    sed fames fermentum, augue dignissim. Montes, velit velit eu gravida nibh in
-                                    feugiat.
-                                </p>
-                            </div>
-                            <div class="pbt_info_table">
-                                <div class="pbtit_single">
-                                    <p class="specs">Color</p>
-                                    <p class="spec_text">Black, Brown, Red</p>
-                                </div>
-                                <div class="pbtit_single">
-                                    <p class="specs">Material</p>
-                                    <p class="spec_text">Artificial Leather</p>
-                                </div>
-                                <div class="pbtit_single">
-                                    <p class="specs">Weight</p>
-                                    <p class="spec_text">0.5kg</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="pb_tab_content qna">
-                    <h4>Question about this product (3)</h4>
-                    <div class="pbqna_wrp">
-                        <div class="single_pbqna">
-                            <div class="pbqna_icon">
-                                <i class="icon-user-line"></i>
-                            </div>
-                            <div class="pbqna_content">
-                                <h5>Any discount?</h5>
-                                <p>Dr.SaifuzZ. - 27 Oct 2021</p>
-                            </div>
-                        </div>
-                        <div class="single_pbqna">
-                            <div class="pbqna_icon">
-                                <i class="las la-headset"></i>
-                            </div>
-                            <div class="pbqna_content">
-                                <h5>There is no discount sir</h5>
-                                <p>Store Admin - 27 Oct 2021</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pbqna_wrp">
-                        <div class="single_pbqna">
-                            <div class="pbqna_icon">
-                                <i class="icon-user-line"></i>
-                            </div>
-                            <div class="pbqna_content">
-                                <h5>Any discount?</h5>
-                                <p>Dr.SaifuzZ. - 27 Oct 2021</p>
-                            </div>
-
-                        </div>
-                        <div class="single_pbqna">
-                            <div class="pbqna_icon">
-                                <i class="las la-headset"></i>
-                            </div>
-                            <div class="pbqna_content">
-                                <h5>There is no discount sir</h5>
-                                <p>Store Admin - 27 Oct 2021</p>
-                            </div>
-                        </div>
-                    </div>
-              
-
-                    <div class="pbqna_form">
-                        <form action="#">
-                            <textarea placeholder="Type your question"></textarea>
-                            <button class="default_btn rounded">Ask Question</button>
-                        </form>
-                    </div>
-                </div>
+                
+            {% for review in reviews %}
                 <div class="pb_tab_content review">
-                    <div class="review_rating">
-                        <div class="total_rating">
-                            <div class="trating_number">
-                                <span class="avrage">4.9</span>
-                                <span class="from">/5</span>
-                            </div>
-                            <div class="rating_star">
-                                <span><i class="las la-star"></i></span>
-                                <span><i class="las la-star"></i></span>
-                                <span><i class="las la-star"></i></span>
-                                <span><i class="las la-star"></i></span>
-                                <span><i class="las la-star"></i></span>
-                            </div>
-                            <div class="trating_count">20 Ratings</div>
-                        </div>
-                        <div class="overall_rating">
-                            <div class="single_ovrating d-flex align-items-center">
-                                <div class="rating_star">
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                </div>
-                                <div class="rating_pbox"><span style="width: 70%;"></span></div>
-                                <p class="rating_count">18</p>
-                            </div>
-                            <div class="single_ovrating d-flex align-items-center">
-                                <div class="rating_star">
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="lar la-star"></i></span>
-                                </div>
-                                <div class="rating_pbox"><span style="width: 20%;"></span></div>
-                                <p class="rating_count">2</p>
-                            </div>
-                            <div class="single_ovrating d-flex align-items-center">
-                                <div class="rating_star">
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="lar la-star"></i></span>
-                                    <span><i class="lar la-star"></i></span>
-                                </div>
-                                <div class="rating_pbox"><span style="width: 0%;"></span></div>
-                                <p class="rating_count">0</p>
-                            </div>
-                            <div class="single_ovrating d-flex align-items-center">
-                                <div class="rating_star">
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="lar la-star"></i></span>
-                                    <span><i class="lar la-star"></i></span>
-                                    <span><i class="lar la-star"></i></span>
-                                </div>
-                                <div class="rating_pbox"><span style="width: 0%;"></span></div>
-                                <p class="rating_count">0</p>
-                            </div>
-                            <div class="single_ovrating d-flex align-items-center">
-                                <div class="rating_star">
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="lar la-star"></i></span>
-                                    <span><i class="lar la-star"></i></span>
-                                    <span><i class="lar la-star"></i></span>
-                                    <span><i class="lar la-star"></i></span>
-                                </div>
-                                <div class="rating_pbox"><span style="width: 0%;"></span></div>
-                                <p class="rating_count">0</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review_header d-flex align-items-center justify-content-between">
-                        <p class="m-0 text-semibold">Product Reviews</p>
-                        <div class="review_filters">
-                            <select class="nice_select">
-                                <option value="">Sort by</option>
-                                <option value="">Price low-high</option>
-                                <option value="">Price high-low</option>
-                            </select>
-                        </div>
-                    </div>
                     <div class="review_cont_wrap">
                         <div class="single_review_wrp">
                             <div class="review_avatar">
-                                <img loading="lazy"  src="assets/images/avatar.png" alt="user">
+                                <img loading="lazy"  src="{{review.user.img.url}}" alt="user">
                             </div>
                             <div class="review_content">
-                                <h5>by Sadat A.</h5>
-                                <div class="rating_star">
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                </div>
-                                <div class="review_date">30 Jul 2021</div>
+                                <h5>by {{review.user.name}}</h5>
+                                <div class="review_date">{{review.date}}</div>
                                 <div class="review_body">
-                                    <p>Lorem Ipsumin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem
-                                        quis bibendum auctor, nisi elit consequat ipsum, nec
-                                        sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate</p>
-                                    <div class="review_imgs">
-                                        <img loading="lazy"  src="assets/images/product.png" alt="review">
-                                        <img loading="lazy"  src="assets/images/product.png" alt="review">
-                                        <img loading="lazy"  src="assets/images/product.png" alt="review">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_review_wrp border-bottom-0 mb-0 pb-0">
-                            <div class="review_avatar">
-                                <img loading="lazy"  src="assets/images/avatar.png" alt="user">
-                            </div>
-                            <div class="review_content">
-                                <h5>by Sadat A.</h5>
-                                <div class="rating_star">
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="las la-star"></i></span>
-                                    <span><i class="lar la-star"></i></span>
-                                </div>
-                                <div class="review_date">30 Jul 2021</div>
-                                <div class="review_body">
-                                    <p>Lorem Ipsumin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem
-                                        quis bibendum auctor, nisi elit consequat ipsum, nec
-                                        sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate</p>
-                                    <div class="review_imgs">
-                                        <img loading="lazy"  src="assets/images/product.png" alt="review">
-                                        <img loading="lazy"  src="assets/images/product.png" alt="review">
-                                        <img loading="lazy"  src="assets/images/product.png" alt="review">
-                                    </div>
+                                    <p>{{review.content}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>  
+            {% endfor %}              
             </div>
 
         </div>
