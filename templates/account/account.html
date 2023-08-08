@@ -26,7 +26,7 @@
                 </div>
                 <div class="acprof_cont">
                   <p>Hello,</p>
-                  <h4>Russell Ahmed</h4>
+                  <h4>{{user.name}}</h4>
                 </div>
                 <div class="profile_hambarg d-lg-none d-block">
                   <i class="las la-bars"></i>
@@ -41,7 +41,7 @@
                     </h4>
                   </a>
                   <a href="{% url 'usre_info' %}">Profile Information</a>
-                  <a href="account-change-password.html">Change Password</a>
+                  <a href="{% url 'change_password' %}">Change Password</a>
                 </div>
                 <div class="acprof_links">
                   <a href="account-order-history.html">

@@ -92,3 +92,20 @@ def edit_account(request):
         form = EditAccountForm(instance=user)
 
     return render(request, 'account/account_detail.html', {'form': form})
+
+
+
+from .forms import ChangePasswordForm
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = ChangePasswordForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            
+            return redirect('/')  # Redirect to account detail page after successful password change
+    else:
+        form = ChangePasswordForm(user=request.user)
+
+    return render(request, 'account/change_password.html', {'form': form})
