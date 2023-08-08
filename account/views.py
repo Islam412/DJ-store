@@ -2,6 +2,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .models import CustomUser
+from shop.models import Order
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404
 
 
 def signup(request):
@@ -54,5 +57,19 @@ def signout(request):
     # Redirect to a success page or any other appropriate view
     return redirect('/')
 
-def User(request):
-    return render(request,'account/account.html')
+
+
+@login_required
+def account(request):
+    user = request.user
+    user_orders = user.orders.all() if hasattr(user, 'orders') else []
+
+    return render(request, 'account/account.html', {'user': user, 'user_orders': user_orders})
+
+
+
+
+@login_required
+def order_detail(request, order_id):
+    order = get_object_or_404(Order, pk=order_id, user=request.user)
+    return render(request, 'account/order_detail.html', {'order': order})

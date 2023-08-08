@@ -3,6 +3,7 @@ from colorfield.fields import ColorField
 from django.contrib.auth.models import User
 from django.conf import settings
 import json
+from django.utils import timezone
 from account.models import CustomUser
 #_________________________________________
 class Category(models.Model):
@@ -50,13 +51,14 @@ class CartItem(models.Model):
         return f"{self.quantity} x {self.product.Name} in Cart for {self.cart}"
 #_____________________________________________________________________
 class Order(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,related_name='orders')
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     phone = models.CharField(max_length=20)
     email = models.EmailField()
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     cart_items = models.ManyToManyField(CartItem) 
+    created_at = models.DateField(default=timezone.now)
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('shipped', 'Shipped'),

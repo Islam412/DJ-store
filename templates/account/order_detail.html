@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+        <div class="container">
+      <div class="breadcrumbs">
+        <a href="index-1.html"><i class="las la-home"></i></a>
+        <a href="account.html">My Account</a>
+        <a href="#" class="active">Order Details</a>
+      </div>
+    </div>
+      <div class="my_account_wrap section_padding_b">
+      <div class="container">
+        <div class="row">
+          <!--  account sidebar  -->
+         
+          <!-- account content -->
+          <div class="col-lg-9">
+            <div class="order_detail_wrapper shadow_sm">
+              <h4 class="od_title">Order Details</h4>
+              <!-- order details -->
+              <div
+                class="orderdet_info d-flex align-items-center justify-content-between flex-wrap"
+              >
+                
+                <div class="single_orderdet">
+                  <h5>Order Number</h5>
+                  <p>{{ order.pk }}</p>
+                </div>
+                <div class="orderdet_btn">
+                  <a
+                    href="account-review-details.html"
+                    class="default_btn second rounded text-capitalize small"
+                    >Write A Review</a
+                  >
+                </div>
+              </div>
+
+              <!-- shipping address process -->
+              <div class="shipping_process">
+                <div class="sprocess_cont">
+                  <div class="sprosbar">
+                    <span class="sp_fill"></span>
+                  </div>
+
+                  <div class="single_sproc_cont">
+                    <div class="sproc_cont_dot"></div>
+                    <p>Processing</p>
+                  </div>
+                  <div class="single_sproc_cont">
+                    <div class="sproc_cont_dot"></div>
+                    <p>Shipped</p>
+                  </div>
+                  <div class="single_sproc_cont">
+                    <div class="sproc_cont_dot"></div>
+                    <p>Delivered</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- product details -->
+              <div class="order_prodetails d-flex align-items-center flex-wrap">
+                <div class="orderprod_img">
+                    <img src="{{ cart_item.product.Image.url }}" class="card-img-top" alt="{{ cart_item.product.Name }}">
+                </div>
+                <div class="single_orderdet pdname">
+                  <h5 class="card-title">{{ cart_item.product.Name }}</h5>
+                  
+                </div>
+                <div
+                  class="single_orderdet w-xs-33 ms-md-auto ms-0 mt-3 mt-md-0"
+                >
+                  <h5>{{ order.total_price }}</h5>
+                </div>
+                <div class="single_orderdet w-xs-33 ms-auto mt-3 mt-md-0">
+                  <h5>Qty:{{ cart_item.quantity }}</h5>
+                </div>
+              </div>
+            </div>
+
+           
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock content %}
+
