@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+  <div class="container">
+    <h2>Add Product</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Add Product</button>
+        {% endbuttons %}
+    </form>
+  </div>
+{% endblock %}

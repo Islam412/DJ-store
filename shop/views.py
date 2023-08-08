@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django import forms
 from django.db.models import Count
+from .forms import AddProductForm
 # Create your views here.
 
 
@@ -242,3 +243,23 @@ def checkout(request):
         total_price = 0
 
     return render(request, 'shop/checkout.html', {'cart_items': cart_items, 'total_price': total_price})
+
+
+
+
+
+@login_required
+def add_product(request):
+    if request.method == "POST":
+        form = AddProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            myform = form.save(commit=False)
+            myform.user = request.user
+            myform.save()
+            return redirect('shop')  # Redirect to product list page after adding product
+    else:
+        form = AddProductForm()
+
+    return render(request, 'shop/add_product.html', {'form': form})
+
+

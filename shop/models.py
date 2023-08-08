@@ -25,6 +25,7 @@ class Brand(models.Model):
         return self.name
 #_____________________________________________________
 class Product(models.Model):
+    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='Product_user',null=True,blank=True)
     Name = models.CharField(max_length=60)
     Price = models.FloatField()
     Description = models.TextField(max_length=2000)
@@ -85,3 +86,10 @@ class wishlistItem(models.Model):
     def __str__(self):
         return f"{self.quantity} x {self.product.Name} in wishlist for {self.wishlist.user.name}"
 #___________________________________________________________________________________________
+
+class Review(models.Model):
+    paroduct = models.ForeignKey(Product,on_delete=models.SET_NULL,related_name='review_product',null=True,blank=True)
+    content = models.TextField(max_length=20000)
+    date = models.DateField(default=timezone.now)
+    def __str__(self):
+        return self.content
