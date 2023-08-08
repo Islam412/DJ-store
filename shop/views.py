@@ -90,7 +90,7 @@ def detail(request, pk):
             form.user = request.user
             form.save()
             # Redirect back to the detail page after adding the review
-            return redirect('/')
+            return redirect('detail',pk=pk)
     else:
         form = AddReviewForm()
 
