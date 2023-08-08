@@ -19,7 +19,7 @@
                   <a href="account.html">
                     <img
                         loading="lazy"
-                        src="{% static 'assets/images/avatar-2.png' %}"
+                        src="{{user.img.url}}"
                         alt="user"
                     />
                   </a>
@@ -40,8 +40,7 @@
                       Manage My Account
                     </h4>
                   </a>
-                  <a href="account-profile-info.html">Profile Information</a>
-                  <a href="account-manage-address.html">Manage Address</a>
+                  <a href="{% url 'usre_info' %}">Profile Information</a>
                   <a href="account-change-password.html">Change Password</a>
                 </div>
                 <div class="acprof_links">
@@ -51,19 +50,8 @@
                       My Order History
                     </h4>
                   </a>
-                  <a href="account-return-order.html">My Returns</a>
-                  <a href="account-order-cancel.html">My Cancellations</a>
-                  <a href="account-my-reviews.html">My Reviews</a>
                 </div>
-                <div class="acprof_links">
-                  <a href="account-payment-methods.html">
-                    <h4 class="acprof_link_title">
-                      <i class="las la-credit-card"></i>
-                      Payments Methods
-                    </h4>
-                  </a>
-                  <a href="account-voucher.html">Voucher</a>
-                </div>
+               
                 <div class="acprof_links">
                   <a href="{% url 'wishlist_list'  %}">
                     <h4 class="ac_link_title">

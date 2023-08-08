@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #----------lib----------
     'colorfield',
+    "bootstrap4",
     #----------end lib------------- 
     'shop',
     'contact',

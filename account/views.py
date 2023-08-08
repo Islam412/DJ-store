@@ -73,3 +73,22 @@ def account(request):
 def order_detail(request, order_id):
     order = get_object_or_404(Order, pk=order_id, user=request.user)
     return render(request, 'account/order_detail.html', {'order': order})
+
+
+
+from .forms import EditAccountForm
+
+
+@login_required
+def edit_account(request):
+    user = request.user
+
+    if request.method == 'POST':
+        form = EditAccountForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('usre_info')  # Redirect to account detail page after successful edit
+    else:
+        form = EditAccountForm(instance=user)
+
+    return render(request, 'account/account_detail.html', {'form': form})
