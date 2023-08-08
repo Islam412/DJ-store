@@ -93,3 +93,9 @@ class Review(models.Model):
     date = models.DateField(default=timezone.now)
     def __str__(self):
         return self.content
+#__________________________________________________________________________________
+class Flash(models.Model):
+    pro = models.ForeignKey(Product,on_delete=models.CASCADE,related_name='Flash_product')
+    def __str__(self):
+        return str(self.pro)
+#_____________________________________________________________________________

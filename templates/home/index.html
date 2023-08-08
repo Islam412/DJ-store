@@ -366,6 +366,9 @@
                                             <p class="rating_count">(150)</p>
                                         </div>
                                     </div>
+                                    <div class="product_adcart">
+                                        <a href="{% url 'add_to_cart' i.id %}" class="default_btn">Add to cart</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -379,54 +382,56 @@
      <section class="new_arrive section_padding_b">
         <div class="container">
             <div class="d-flex align-items-start justify-content-between">
-                <h2 class="section_title_2">Recomended for you</h2>
+                <h2 class="section_title_2">Flash Sale</h2>
                 <div class="seemore_2 pt-2">
                     <a href="#">See More <span><i class="las la-angle-right"></i></span></a>
                 </div>
             </div>
             <div class="row gy-4">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single_new_arrive">
-                        <div class="sna_img">
-                            <img loading="lazy" class="prd_img" src="{% static 'assets/images/laptop-3.png' %}" alt="product">
-                            <span class="tag">Hot</span>
-                            <div class="prodcut_hovcont">
-                                <a href="javascript:void(0)" class="icon open_quickview" tabindex="0">
-                                   <i class="icon-search-left"></i>
-                                </a>
-                                <a href="#" class="icon" tabindex="0">
-                                    <i class="icon-heart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="sna_content">
-                            <a href="product-view.html">
-                                <h4>HP Pavilion 15</h4>
-                            </a>
-                            <div class="ratprice">
-                                <div class="price">
-                                    <span class="org_price">$45.00</span>
-                                    <span class="prev_price">$55.45</span>
+                {% for item in flash %}
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single_new_arrive">
+                            <div class="sna_img">
+                                <img loading="lazy" class="prd_img" src="{{item.pro.Image.url}}" alt="product">
+                                <span class="tag">Hot</span>
+                                <div class="prodcut_hovcont">
+                                    <a href="{% url 'detail' item.pro.id %}" class="icon open_quickview" tabindex="0">
+                                    <i class="icon-search-left"></i>
+                                    </a>
+                                    <a href="{% url 'add_to_wishlist' item.pro.id %}" class="icon" tabindex="0">
+                                        <i class="icon-heart"></i>
+                                    </a>
                                 </div>
-                                <div class="rating">
-                                    <div class="d-flex align-items-center justify-content-start">
-                                        <div class="rating_star">
-                                            <span><i class="las la-star"></i></span>
-                                            <span><i class="las la-star"></i></span>
-                                            <span><i class="las la-star"></i></span>
-                                            <span><i class="las la-star"></i></span>
-                                            <span><i class="las la-star"></i></span>
+                            </div>
+                            <div class="sna_content">
+                                <a href="{% url 'detail' item.pro.id %}">
+                                    <h4>{{item.pro.Name}}</h4>
+                                </a>
+                                <div class="ratprice">
+                                    <div class="price">
+                                        <span class="org_price">{{item.pro.Price}}</span>
+                                        
+                                    </div>
+                                    <div class="rating">
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <div class="rating_star">
+                                                <span><i class="las la-star"></i></span>
+                                                <span><i class="las la-star"></i></span>
+                                                <span><i class="las la-star"></i></span>
+                                                <span><i class="las la-star"></i></span>
+                                                <span><i class="las la-star"></i></span>
+                                            </div>
+                                            <p class="rating_count">(150)</p>
                                         </div>
-                                        <p class="rating_count">(150)</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="product_adcart">
-                                <button class="default_btn">Add to cart</button>
+                                <div class="product_adcart">
+                                    <a href="{% url 'add_to_cart' item.pro.id %}" class="default_btn">Add to cart</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
