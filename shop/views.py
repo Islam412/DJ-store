@@ -74,31 +74,31 @@ COLOR_MAP = {
 
 
 def detail(request, pk):
-    pro = get_object_or_404(Product, id=pk)
+    pro = Product.objects.get(id=pk)
     
     color_code = pro.Color
     color_name = COLOR_MAP.get(color_code, 'Unknown Color')
     
     # Fetch existing reviews for the product
-    reviews = Review.objects.filter(paroduct=pro)
+    reviews = Review.objects.filter(product=pro)
 
     if request.method == 'POST':
-        review_form = AddReviewForm(request.POST)
-        if review_form.is_valid():
-            review = review_form.save(commit=False)
-            review.product = pro
-            review.user = request.user
-            review.save()
+        form = AddReviewForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.product = pro
+            form.user = request.user
+            form.save()
             # Redirect back to the detail page after adding the review
-            return redirect('detail', pk=pk)
+            return redirect('/')
     else:
-        review_form = AddReviewForm()
+        form = AddReviewForm()
 
     return render(request, 'shop/detail.html', {
         'pro': pro,
         'color_name': color_name,
         'reviews': reviews,
-        'review_form': review_form,
+        'form': form,
     })
 
 
