@@ -195,9 +195,11 @@ def calculate_total_price(cart_items):
 
 
 
+
 def checkout(request):
     if request.user.is_authenticated:
         cart = Cart.objects.filter(user=request.user).first()
+
         if cart:
             cart_items = CartItem.objects.filter(cart=cart)
             total_price = calculate_total_price(cart_items)
@@ -211,25 +213,25 @@ def checkout(request):
             phone = request.POST.get('phone')
             email = request.POST.get('email')
 
-            order = Order.objects.create(
-                user=request.user,
-                name=name,
-                address=address,
-                phone=phone,
-                email=email,
-                total_price=total_price
-            )
+            with transaction.atomic():
+                order = Order.objects.create(
+                    user=request.user,
+                    name=name,
+                    address=address,
+                    phone=phone,
+                    email=email,
+                    total_price=total_price
+                )
 
-            for item in cart_items:
-                new_quantity = int(request.POST.get(f'quantity_{item.id}', 1))
-                if new_quantity > 0:
-                    cart_item = CartItem.objects.get(id=item.id)
-                    cart_item.quantity = new_quantity
-                    cart_item.save()
-                    order.cart_items.add(cart_item)
+                for item in cart_items:
+                    new_quantity = int(request.POST.get(f'quantity_{item.id}', 1))
+                    if new_quantity > 0:
+                        cart_item = CartItem.objects.get(id=item.id)
+                        cart_item.quantity = new_quantity
+                        cart_item.save()
+                        order.cart_items.add(cart_item)
 
-            cart_items.delete()
-            return redirect('confirm/')
+                return redirect('confirm/')
 
     else:
         cart_items = None
