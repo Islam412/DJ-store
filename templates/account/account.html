@@ -16,12 +16,15 @@
             <div class="account_sidebar">
               <div class="account_profile position-relative shadow_sm">
                 <div class="acprof_img">
-                  <a href="account.html">
+                  <a href="{% url 'user' %}">
+
                     <img
-                        loading="lazy"
-                        src="{{user.img.url}}"
-                        alt="user"
+                          loading="lazy"
+                          src="{% if user.img %}{{ user.img.url }}{% else %}{% static 'assets/images/default_image.jpeg' %}{% endif %}"
+                          alt="Profile Image"
                     />
+
+
                   </a>
                 </div>
                 <div class="acprof_cont">
