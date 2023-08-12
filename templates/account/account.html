@@ -37,7 +37,7 @@
               </div>
               <div class="acprof_wrap shadow_sm">
                 <div class="acprof_links">
-                  <a href="account.html" class="active">
+                  <a href="{% url 'usre_info' %}" class="active">
                     <h4 class="acprof_link_title">
                       <i class="lar la-id-card"></i>
                       Manage My Account
@@ -46,14 +46,7 @@
                   <a href="{% url 'usre_info' %}">Profile Information</a>
                   <a href="{% url 'change_password' %}">Change Password</a>
                 </div>
-                <div class="acprof_links">
-                  <a href="account-order-history.html">
-                    <h4 class="acprof_link_title">
-                      <i class="las la-gift"></i>
-                      My Order History
-                    </h4>
-                  </a>
-                </div>
+                
                
                 <div class="acprof_links">
                   <a href="{% url 'wishlist_list'  %}">

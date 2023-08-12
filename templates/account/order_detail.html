@@ -59,10 +59,10 @@
               <!-- product details -->
               <div class="order_prodetails d-flex align-items-center flex-wrap">
                 <div class="orderprod_img">
-                    <img src="{{ cart_item.product.Image.url }}" class="card-img-top" alt="{{ cart_item.product.Name }}">
+                    <img src="{{order.product.Image.url}}" class="card-img-top" alt="{{ order.product.Name }}">
                 </div>
                 <div class="single_orderdet pdname">
-                  <h5 class="card-title">{{ cart_item.product.Name }}</h5>
+                  <h5 class="card-title">{{ order.product.Name }}</h5>
                   
                 </div>
                 <div
@@ -71,7 +71,7 @@
                   <h5>{{ order.total_price }}</h5>
                 </div>
                 <div class="single_orderdet w-xs-33 ms-auto mt-3 mt-md-0">
-                  <h5>Qty:{{ cart_item.quantity }}</h5>
+                  <h5>Qty:{{ order.quantity }}</h5>
                 </div>
               </div>
             </div>
