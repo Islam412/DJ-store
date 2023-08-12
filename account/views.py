@@ -11,7 +11,6 @@ def signup(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         img = request.FILES.get('img')
-        age = request.POST.get('age')
         email = request.POST.get('email')
         password = request.POST.get('password')
         
@@ -20,7 +19,6 @@ def signup(request):
         user = CustomUser(
             name=name,
             img=img,
-            age=age,
             email=email,
             
         )
@@ -34,23 +32,24 @@ def signup(request):
 
 
 
+
 def signin(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
+        username_or_email = request.POST.get('username_or_email')
         password = request.POST.get('password')
 
-        # Authenticate the user
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, username=username_or_email, password=password)
 
         if user is not None:
             login(request, user)
-            # Redirect to a success page or any other appropriate view
             return redirect('/')
         else:
-            # Invalid credentials, show an error message or redirect back to the login page
             return render(request, 'account/login.html', {'error': 'Invalid credentials'})
 
     return render(request, 'account/login.html')
+
+
+
 
 def signout(request):
     logout(request)
