@@ -14,7 +14,7 @@ def signup(request):
         age = request.POST.get('age')
         email = request.POST.get('email')
         password = request.POST.get('password')
-        role = request.POST.get('role')
+        
 
         # Save the new user to the database
         user = CustomUser(
@@ -22,7 +22,7 @@ def signup(request):
             img=img,
             age=age,
             email=email,
-            role=role
+            
         )
         user.set_password(password)  # Hash the password before saving
         user.save()
