@@ -3,6 +3,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -30,9 +31,8 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=100,null=True)
     img = models.ImageField(upload_to='profile_images/', blank=True, null=True,default='profile_images/default_profile.jpeg')
-    age = models.PositiveIntegerField(null=True)
+    
     email = models.EmailField(unique=True,null=True)
-
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
@@ -42,4 +42,4 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['name', 'age', 'role']
 
     def __str__(self):
-        return f"Name: {self.name}\nAge: {self.age}\nEmail: {self.email}\nRole: {self.role}"
+        return f"Name: {self.name}\nEmail: {self.email}\n"

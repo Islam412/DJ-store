@@ -4,7 +4,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 class EditAccountForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['name', 'age', 'email', 'img']
+        fields = ['name','email', 'img']
 
 
 
