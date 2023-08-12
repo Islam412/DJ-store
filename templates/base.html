@@ -132,7 +132,7 @@
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-12">
                             <div class="footer_logo">
-                               <img loading="lazy"  src="{% static 'images/svg/logo.svg' %}" alt="easy shop">
+                               <img loading="lazy"  src="{% static 'assets/images/svg/logo.svg' %}" alt="easy shop">
                             </div>
                             <div class="footet_text">
                                 <p>Lorem ipsum, or lipsum as it is sometimes kno
@@ -140,15 +140,7 @@
                                     phic or web designs the passage.</p>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-12">
-                            <div class="footer_newslet">
-                                <h4>Newsletter</h4>
-                                <form class="footernews_form">
-                                    <input type="text" placeholder="Your email address">
-                                    <button type="submit" class="default_btn">Subscribe</button>
-                                </form>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
                 <div class="col-lg-4 mb-3 mb-md-0">
@@ -156,21 +148,11 @@
                         <div class="col-6">
                             <div class="footer_menu">
                                 <h4 class="footer_title">My Account</h4>
-                                <a href="account-order-history.html">Orders</a>
-                                <a href="wish-list.html">Wishlist</a>
-                                <a href="track-order.html">Track Order</a>
-                                <a href="#">Manage Account</a>
-                                <a href="return-order.html">Return Order</a>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="footer_menu">
-                                <h4 class="footer_title">Information</h4>
-                                <a href="about-us.html">About Us</a>
-                                <a href="return-policy.html">Return Policy</a>
-                                <a href="terms-condition.html">Terms & condition</a>
-                                <a href="privacy-policy.html">Privacy Policy</a>
-                                <a href="faq.html">FAQ</a>
+                                <a href="{% url 'user' %}">Orders</a>
+                                <a href="{% url 'wishlist_list' %}">Wishlist</a>
+                                
+                                <a href="{% url 'usre_info' %}">Manage Account</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -184,16 +166,15 @@
                                     <p>
                                         <span class="icn"><i class="las la-map-marker-alt"></i></span>
 
-                                        7895 Dr New Albuquerue, NM 19800, <br> United
-                                        States Of America
+                                        Egypt - Cairo - Elshorok - elmostaqbel city 
                                     </p>
                                     <p class="phn">
                                         <span class="icn"><i class="las la-phone"></i></span>
-                                        +566 477 256, +566 254 575
+                                        +20 1004993573
                                     </p>
                                     <p class="eml">
                                         <span class="icn"><i class="lar la-envelope"></i></span>
-                                        info@domain.com
+                                        info@refcart.com
                                     </p>
                                 </div>
                             </div>
