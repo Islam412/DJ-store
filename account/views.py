@@ -71,7 +71,7 @@ def account(request):
 
 @login_required
 def order_detail(request, order_id):
-    order = get_object_or_404(Order, pk=order_id, user=request.user)
+    order = Order.objects.filter(user=request.user)
     return render(request, 'account/order_detail.html', {'order': order})
 
 
