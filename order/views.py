@@ -12,6 +12,13 @@ from django.db.models import Count
 def order_confirmation(request):
     return render(request, 'shop/confirm.html')
 
+def calculate_total_price(cart_items):
+    total_price = 0
+    for cart_item in cart_items:
+        total_price += cart_item.product.Price * cart_item.quantity
+    return total_price
+
+
 
 def checkout(request):
     if request.user.is_authenticated:
@@ -48,7 +55,7 @@ def checkout(request):
                         cart_item.save()
                         order.cart_items.add(cart_item)  # Associate cart item with the order
 
-                return redirect('confirm/')
+                return redirect('confirm')
 
     else:
         cart_items = None
