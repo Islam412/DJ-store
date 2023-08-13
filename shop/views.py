@@ -225,14 +225,10 @@ def calculate_total_price(cart_items):
 
 
 
-
-
-
-
 def checkout(request):
     if request.user.is_authenticated:
         # Filter the cart based on the currently authenticated user
-        cart = Cart.objects.filter(user=request.user).first()
+        cart = Cart.objects.get(user=request.user)
 
         if cart:
             cart_items = CartItem.objects.filter(cart=cart)

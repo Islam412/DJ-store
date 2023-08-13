@@ -116,7 +116,12 @@
                     <div class="review_cont_wrap">
                         <div class="single_review_wrp">
                             <div class="review_avatar">
-                                <img loading="lazy"  src="{{review.user.img.url}}" alt="user">
+                                {% if review.user.img %}
+                                    <img loading="lazy" src="{{ review.user.img.url }}" alt="user">
+                                {% else %}
+                                    <img loading="lazy" src="{% static 'assets/images/default_image.jpeg' %}" alt="user">
+                                {% endif %}
+
                             </div>
                             <div class="review_content">
                                 <h5>by {{review.user.name}}</h5>

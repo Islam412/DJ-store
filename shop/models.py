@@ -39,7 +39,7 @@ class Product(models.Model):
         return self.Name
 #________________________________________________________
 class Cart(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"Cart for {self.user.name}"
