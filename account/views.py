@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import CustomUser
 from django.db.models import Q 
 from django.contrib.auth import get_user_model
-from shop.models import Order
+from order.models import Order
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from .CustomUserBackend.backends import CustomUserBackend 

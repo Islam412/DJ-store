@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Count
-from shop.models import Product, Category, CartItem, wishlistItem , Flash
+from shop.models import Product, Category,Flash
+from cart.models import CartItem, wishlistItem 
 from django.contrib.auth import get_user_model
 
 def product_search_view(request):
