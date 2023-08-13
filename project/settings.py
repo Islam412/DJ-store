@@ -51,7 +51,8 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'account.CustomUser' 
-AUTHENTICATION_BACKENDS = ['account.custom_auth_backend.CustomNameBackend']
+AUTHENTICATION_BACKENDS = ['account.CustomUserBackend.backends.CustomUserBackend']
+
 
 
 MIDDLEWARE = [

@@ -102,12 +102,11 @@ def detail(request, pk):
     })
 
 
-
 def add_to_cart(request, product_id):
     if request.user.is_authenticated:
         cart, created = Cart.objects.get_or_create(user=request.user)
         product = Product.objects.get(pk=product_id)  # Replace with your product model
-        cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+        cart_item, created = CartItem.objects.get_or_create(cart=cart, user=request.user, product=product)
         
         # Check if the cart item was created and not already in the cart
         if not created:
@@ -122,9 +121,12 @@ def add_to_cart(request, product_id):
 
 
 
+
 def view_cart(request):
     if request.user.is_authenticated:
+        # Filter the cart based on the currently authenticated user
         cart = Cart.objects.filter(user=request.user).first()
+
         if cart:
             cart_items = CartItem.objects.filter(cart=cart)
         else:
@@ -145,6 +147,8 @@ def view_cart(request):
         return render(request, 'shop/cart.html', {'cart_items': cart_items, 'quantity_choices': quantity_choices})
     else:
         return render(request, 'shop/cart.html', {'cart_items': None})
+
+
 
 
 def delete_cart_item(request, id):
@@ -224,8 +228,10 @@ def calculate_total_price(cart_items):
 
 
 
+
 def checkout(request):
     if request.user.is_authenticated:
+        # Filter the cart based on the currently authenticated user
         cart = Cart.objects.filter(user=request.user).first()
 
         if cart:
@@ -251,13 +257,12 @@ def checkout(request):
                     total_price=total_price
                 )
 
-                for item in cart_items:
-                    new_quantity = int(request.POST.get(f'quantity_{item.id}', 1))
+                for cart_item in cart_items:
+                    new_quantity = int(request.POST.get(f'quantity_{cart_item.id}', 1))
                     if new_quantity > 0:
-                        cart_item = CartItem.objects.get(id=item.id)
                         cart_item.quantity = new_quantity
                         cart_item.save()
-                        order.cart_items.add(cart_item)
+                        order.cart_items.add(cart_item)  # Associate cart item with the order
 
                 return redirect('confirm/')
 
@@ -266,7 +271,6 @@ def checkout(request):
         total_price = 0
 
     return render(request, 'shop/checkout.html', {'cart_items': cart_items, 'total_price': total_price})
-
 
 
 

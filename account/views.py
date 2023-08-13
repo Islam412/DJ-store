@@ -2,9 +2,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .models import CustomUser
+from django.db.models import Q 
+from django.contrib.auth import get_user_model
 from shop.models import Order
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
+from .CustomUserBackend.backends import CustomUserBackend 
 
 
 def signup(request):
@@ -29,8 +32,6 @@ def signup(request):
         return redirect('signin/')  # Use the name of the URL pattern, not the URL itself
 
     return render(request, 'account/register.html')
-
-
 
 
 def signin(request):

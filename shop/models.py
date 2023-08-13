@@ -46,10 +46,14 @@ class Cart(models.Model):
 #________________________________________________________
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)  # Add this field to associate with a user
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+
     def __str__(self):
         return f"{self.quantity} x {self.product.Name} in Cart for {self.cart}"
+
+
 #_____________________________________________________________________
 class Order(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,related_name='orders')
