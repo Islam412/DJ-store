@@ -29,17 +29,19 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    name = models.CharField(max_length=100,null=True)
-    img = models.ImageField(upload_to='profile_images/', blank=True, null=True,default='profile_images/default_profile.jpeg')
-    
-    email = models.EmailField(unique=True,null=True)
+    name = models.CharField(max_length=100, null=True)
+    img = models.ImageField(upload_to='profile_images/', blank=True, null=True, default='profile_images/default_profile.jpeg')
+
+    email = models.EmailField(unique=True, null=True)
+    vwrfi = models.CharField(max_length=100)  # Add the vwrfi field
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
     objects = CustomUserManager()
-    
+
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ['name', 'vwrfi']  # Add 'vwrfi' to the required fields
 
     def __str__(self):
         return f"Name: {self.name}\nEmail: {self.email}\n"
+

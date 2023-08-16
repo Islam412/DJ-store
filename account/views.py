@@ -2,36 +2,66 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .models import CustomUser
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_decode
+from django.utils.encoding import force_str
+
+from .models import CustomUser
 from django.db.models import Q 
 from django.contrib.auth import get_user_model
 from order.models import Order
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from .CustomUserBackend.backends import CustomUserBackend 
+from django.contrib.auth.tokens import default_token_generator
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.core.mail import send_mail
+
+from .models import CustomUser
+from django.utils.http import urlsafe_base64_decode
+from django.urls import reverse
 
 
 def signup(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
-        img = request.FILES.get('img')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        
+        email = request.POST['email']
+        name = request.POST['name']
+        password = request.POST['password']
 
-        # Save the new user to the database
-        user = CustomUser(
-            name=name,
-            img=img,
-            email=email,
-            
-        )
-        user.set_password(password)  # Hash the password before saving
-        user.save()
+        user = CustomUser.objects.create_user(email=email, name=name, password=password)
 
-        # Redirect to a success page or any other appropriate view
-        return redirect('signin/')  # Use the name of the URL pattern, not the URL itself
+        # Generate a unique token for email verification
+        token = default_token_generator.make_token(user)
+
+        # Send verification email
+        activation_url = request.build_absolute_uri(reverse('activate', args=[urlsafe_base64_encode(force_bytes(user.pk)), token]))
+        subject = 'Activate Your Account'
+        message = render_to_string('account/activation_email.html', {
+            'user': user,
+            'activation_url': activation_url,
+        })
+        send_mail(subject, message, 'masterkhaled33@gmail.com', [email])
+
+        return render(request, 'account/email_verification.html', {'email': email})
 
     return render(request, 'account/register.html')
+
+
+
+def activate_account(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()  # Decode bytes to string
+        user = CustomUser.objects.get(pk=uid)
+        if default_token_generator.check_token(user, token):
+            user.is_active = True
+            user.save()
+            return render(request, 'account/activation_success.html')
+    except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):
+        pass
+    return render(request, 'account/activation_failed.html')
+
 
 
 def signin(request):
