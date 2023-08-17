@@ -16,7 +16,8 @@ def product_search_view(request):
     category_id = request.GET.get('category', None)
 
     products = Product.objects.all()
-    pro = Product.objects.all()[:4]
+    pro = Product.objects.order_by('-id')[:4]
+    product = Product.objects.all()
 
     if search_query:
         products = products.filter(Name__icontains=search_query)
@@ -29,6 +30,7 @@ def product_search_view(request):
     context = {
         'search_query': search_query,
         'products': products,
+        'product':product,
         'flash':flash,
         'pro': pro,
         'cart_items_count': cart_items_count,

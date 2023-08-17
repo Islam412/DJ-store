@@ -7,6 +7,7 @@ from django.utils import timezone
 from account.models import CustomUser
 #_________________________________________
 class Category(models.Model):
+    image = models.ImageField(upload_to='category/',null=True,blank=True)
     name = models.CharField(max_length=50, null=True)
     def __str__(self):
         return self.name

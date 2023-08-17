@@ -2,437 +2,275 @@
 
 {% load static %}
 {% block content %}
- <nav class="home-2">
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-between">
-                <a href="{% url 'home' %}" class="mobile_logo d-block d-lg-none">
-                    <img loading="lazy"  src="{% static 'assets/images/svg/logo-white.svg' %}" alt="logo">
-                </a>
-                <div class="all_category d-none d-lg-block">
-                    <div class="bars text-white d-flex align-items-center justify-content-center">
-                        <span class="icon">
-                            <i class="las la-bars"></i>
-                        </span>
-                        <span class="icon_text">All categories</span>
-                    </div>
-                    <div class="sub_categories active">
-                        <h5 class="d-block position-relative d-lg-none subcats_title">
-                            All categories
-                        </h5>
-
-                        {% for category in categories %}
-                            <a href="{% url 'grid_by_category' category.id %}"  class="singlecats">
-                                <span class="txt">{{category.name}}</span>
-                            </a>
-                        {% endfor %}
-
-
-                    </div>
-                </div>
-                <div class="search_wrap d-none d-lg-block">
-
-                    <div class="search d-flex">
-                        
-                        <div class="search_input">
-                            <form method="GET" action="{% url 'home' %}">
-                                <input type="text" name="search_query" value="{{ search_query }}" placeholder="Search product..." id="show_suggest">
-                        </div>
-                        <div class="search_subimt">
-                            <button>
-                                <span class="d-none d-sm-inline-block">Search</span>
-                                <span class="d-sm-none d-inline-block"><i class="icon-search-left"></i></span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="search_suggest shadow-sm">
-                        <div class="search_result_product">
-                            <a href="product-view.html" class="single_sresult_product">
-                            </a>
-                            <a href="product-view.html" class="single_sresult_product">
-
-                                {% for product in products %}
-                                    <div class="sresult_img">
-                                       <a href="{% url 'detail' product.id %}"> <img loading="lazy" src="{{product.Image.url}}" alt="product"> </a> 
-                                    </div>
-                                    <div class="sresult_content">
-                                        <a  href="{% url 'detail' product.id %}" ><h4>{{product.Name}}</h4> </a>
-                                        
-                                    </div>
-
-                                
-                                    
-
-                                {% endfor %}
-                                
-
-
-
-
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="header_icon d-flex align-items-center">
-
-                    <a href="{% url 'wishlist_list'  %}" class="icon_wrp text-center wishlist ms-0">
-                        <span class="icon">
-                            <i class="icon-heart"></i>
-                        </span>
-                        <span class="icon_text">Wish List</span>
-                       
-                            <span class="pops">{{ wishlist_items_count }}</span>
-                    
-                    </a>
-
-                    <!-- Display the cart count icon and number -->
-                    <div class="header_icon d-flex align-items-center">
-                        <a href="{% url 'cart' %}" class="icon_wrp text-center d-none d-lg-block">
-                            <span class="icon">
-                                <i class="icon-cart"></i>
-                            </span>
-                            <span class="icon_text">Cart</span>
-                           
-                                <span class="pops">{{ cart_items_count }}</span>
-                           
-                               
-                            
-                        </a>
-                        <!-- Add other header icons here -->
-                    </div>
-
-                    <div class="position-relative myacwrap">
-                        <a href="{% url 'user'  %}" class="icon_wrp text-center myacc">
-                            <span class="icon">
-                               <i  class="icon-user-line"></i>
-                            </span>
-                            <span class="icon_text">Account</span>
-                        </a>
-                        <div class="myacc_cont">
-                            <div class="ac_join">
-                                <div class="account_btn d-flex justify-content-between">
-                                     {% if user.is_authenticated %}
-                                    <a href="{% url 'logout' %}" class="default_btn">Log out</a>
-                                    {% else %}
-                                    <a href="{% url 'signup' %}" class="default_btn">Join</a>
-                                    <a href="{% url 'signin' %}" class="default_btn second">Sing in</a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="ac_links">
-                                  <a href="{% url 'user'  %}" class="myac">
-                                    <i class="lar la-id-card"></i>
-                                    My Account
-                                </a>
-                               <a href="{% url 'wishlist_list'  %}">
-                                    <i class="lar la-heart"></i>
-                                    My Wishlist
-                                </a>
-                                <a href="{% url 'cart'  %}">
-                                     <i class="icon-cart"></i>
-                                    My Cart
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </nav>
-    <div class="container-lg home_2_hero_wrp">
-        <div class="home_2_hero">
+    <main class="main-wrapper">
+        <div class="axil-main-slider-area main-slider-style-1">
             <div class="container">
-                <div class="hero_slider_active">
-                    <div class="single_hero_slider bg-3">
-                        <div class="container">
-                            <div class="row align-items-center">
-                                <div class="col-lg-6 col-sm-7">
-                                    <div class="hero_content text-center text-sm-start">
-                                        <p>Get up to 50% off Today only</p>
-                                        <h1>iPhone 11 Pro Max </h1>
-                                        <div class="price">
-                                            <span class="org_price">$450.00</span>
-                                            <span class="prev_price">$550.45</span>
-                                        </div>
-                                        <div class="hero_btn">
-                                            <a class="default_btn rounded" href="{% url 'shop' %}">Shop Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-sm-5 d-none d-sm-block">
-                                    <div class="hero_img">
-                                        <img loading="lazy"  src="{% static 'assets/images/iphone.png' %}" alt="phone">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <section class="features_area  section_padding">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-10">
-                    <div class="row justify-content-center gx-2 gx-md-4">
-                        <div class="col-sm-4 mb-3 mb-sm-0">
-                            <div
-                                class="single_feature d-flex flex-column flex-sm-row align-items-center justify-content-center">
-                                <div class="feature_icon">
-                                    <img loading="lazy"  src="{% static 'assets/images/svg/delivery-van.svg' %}" alt="icon">
-                                </div>
-                                <div class="feature_content">
-                                    <h4>Free shipping</h4>
-                                    <p>Orders over $200</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 mb-3 mb-sm-0">
-                            <div
-                                class="single_feature d-flex flex-column flex-sm-row align-items-center justify-content-center">
-                                <div class="feature_icon">
-                                    <img loading="lazy"  src="{% static 'assets/images/svg/money-back.svg' %}" alt="icon">
-                                </div>
-                                <div class="feature_content">
-                                    <h4>Money Returns</h4>
-                                    <p>30 Days money return</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div
-                                class="single_feature d-flex flex-column flex-sm-row align-items-center justify-content-center">
-                                <div class="feature_icon">
-                                    <img loading="lazy"  src="{% static 'assets/images/svg/service-hours.svg' %}" alt="icon">
-                                </div>
-                                <div class="feature_content">
-                                    <h4>24/7 Support</h4>
-                                    <p>Customer support</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-        <section class="top_ranking section_padding_b">
-        <div class="container">
-            <h2 class="section_title_2 mb-0">Top Ranking</h2>
-            <div class="row">
-                <div class="col-xl-3 col-lg-4 col-6">
-                    <h4 class="single_topr_title">Watch</h4>
-                    <div class="single_top_ranking">
-                        <div class="topr_img">
-                            <a href="product-view.html">
-                                <img loading="lazy"  src="{% static 'assets/images/apple-watch.png' %}" alt="product">
-                            </a>
-                            <span class="tag">1</span>
-                        </div>
-                        <div class="topr_content">
-                            <a href="product-view.html">
-                                <h4>Apple Watch </h4>
-                            </a>
-                            <div class="price">
-                                <span class="org_price">$200.00</span>
-                                <span class="prev_price">$300.45</span>
-                            </div>
-                            <div class="rating">
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rating_star">
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                    </div>
-                                    <p class="rating_count">(150)</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single_top_ranking">
-                        <div class="topr_img">
-                            <a href="product-view.html">
-                               <img loading="lazy"  src="{% static 'assets/images/watch2.png' %}" alt="product">
-                            </a>
-                            <span class="tag">2</span>
-                        </div>
-                        <div class="topr_content">
-                            <a href="product-view.html">
-                                <h4> Callie Smartwatch</h4>
-                            </a>
-                            <div class="price">
-                                <span class="org_price">$150.00</span>
-                                <span class="prev_price">$200.45</span>
-                            </div>
-                            <div class="rating">
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rating_star">
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                    </div>
-                                    <p class="rating_count">(150)</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single_top_ranking">
-                        <div class="topr_img">
-                            <a href="product-view.html">
-                                <img loading="lazy"  src="{% static 'assets/images/watch3.png' %}" alt="product">
+                <div class="row align-items-center">
+                    <div class="col-lg-5 col-sm-6">
+                        <div class="main-slider-content">
+                            <div class="slider-content-activation-one">
 
-                            </a>
-                            <span class="tag">3</span>
-                        </div>
-                        <div class="topr_content">
-                            <a href="product-view.html">
-                                <h4>Cruz Smartwatch</h4>
-                            </a>
-                            <div class="price">
-                                <span class="org_price">$45.00</span>
-                                <span class="prev_price">$55.45</span>
-                            </div>
-                            <div class="rating">
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rating_star">
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                    </div>
-                                    <p class="rating_count">(150)</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-        <!-- new arrive -->
-    <section class="new_arrive section_padding_b">
-        <div class="container">
-            <div class="d-flex align-items-start justify-content-between">
-                <h2 class="section_title_2">New Arrivals</h2>
-                <div class="seemore_2 pt-2">
-                    <a href="#">See More <span><i class="las la-angle-right"></i></span></a>
-                </div>
-            </div>
-            <div class="row gy-4">
-                {% for i in pro  %}
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="single_new_arrive">
-                            <div class="sna_img">
-                            <img loading="lazy" class="prd_img" src="{{i.Image.url}}" alt="product">
-                                <span class="tag">Hot</span>
-                                <div class="prodcut_hovcont">
-                                    </a>
-                                    <a href="{% url 'detail' i.id %}" class="icon open_quickview" tabindex="0">
-                                        <i class="icon-search-left"></i>
-                                    </a>
-                                    <a href="{% url 'add_to_wishlist' i.id %}" class="icon" tabindex="0">
-                                        <i class="icon-heart"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="sna_content">
-                                <a href="{% url 'detail' i.id %}">
-                                    <h4>{{i.Name}}</h4>
-                                </a>
-                                <div class="ratprice">
-                                    <div class="price">
-                                        <span class="org_price">EG {{i.Price}}</span>
-                                        
-                                    </div>
-                                    <div class="rating">
-                                        <div class="d-flex align-items-center justify-content-start">
-                                            <div class="rating_star">
-                                                <span><i class="las la-star"></i></span>
-                                                <span><i class="las la-star"></i></span>
-                                                <span><i class="las la-star"></i></span>
-                                                <span><i class="las la-star"></i></span>
-                                                <span><i class="las la-star"></i></span>
+                                <div class="single-slide slick-slide" data-sal="slide-up" data-sal-delay="400" data-sal-duration="800">
+                                    <span class="subtitle"><i class="fas fa-fire"></i> Hot Deal In This Week</span>
+                                    <h1 class="title">Roco Wireless Headphone</h1>
+                                    <div class="slide-action">
+                                        <div class="shop-btn">
+                                            <a href="{% url 'shop'  %}" class="axil-btn btn-bg-white"><i class="fal fa-shopping-cart"></i>Shop Now</a>
+                                        </div>
+                                        <div class="item-rating">
+                                            <div class="thumb">
+                                                <ul>
+                                                    <li><img src="{% static 'assets/images/others/author1.png' %}" alt="Author"></li>
+                                                    <li><img src="{% static 'assets/images/others/author2.png' %}" alt="Author"></li>
+                                                    <li><img src="{% static 'assets/images/others/author3.png' %}" alt="Author"></li>
+                                                    <li><img src="{% static 'assets/images/others/author4.png' %}" alt="Author"></li>
+
+                                                </ul>
                                             </div>
-                                            <p class="rating_count">(150)</p>
+                                            <div class="content">
+                                                <span class="rating-icon">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fal fa-star"></i>
+                                        </span>
+                                                <span class="review-text">
+                                            <span>100+</span> Reviews
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="product_adcart">
-                                        <a href="{% url 'add_to_cart' i.id %}" class="default_btn">Add to cart</a>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-sm-6">
+                        <div class="main-slider-large-thumb">
+                            <div class="slider-thumb-activation-one axil-slick-dots">
+                                <div class="single-slide slick-slide" data-sal="slide-up" data-sal-delay="600" data-sal-duration="1500">
+                                    <img src="{% static 'assets/images/product/product-38.png' %}" alt="Product">
+                                    <div class="product-price">
+                                        <span class="text">From</span>
+                                        <span class="price-amount">$49.00</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-                
-            </div>
-        </div>
-    </section>
-
-     <section class="new_arrive section_padding_b">
-        <div class="container">
-            <div class="d-flex align-items-start justify-content-between">
-                <h2 class="section_title_2">Flash Sale</h2>
-                <div class="seemore_2 pt-2">
-                    <a href="#">See More <span><i class="las la-angle-right"></i></span></a>
                 </div>
             </div>
-            <div class="row gy-4">
-                {% for item in flash %}
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="single_new_arrive">
-                            <div class="sna_img">
-                                <img loading="lazy" class="prd_img" src="{{item.pro.Image.url}}" alt="product">
-                                <span class="tag">Hot</span>
-                                <div class="prodcut_hovcont">
-                                    <a href="{% url 'detail' item.pro.id %}" class="icon open_quickview" tabindex="0">
-                                    <i class="icon-search-left"></i>
-                                    </a>
-                                    <a href="{% url 'add_to_wishlist' item.pro.id %}" class="icon" tabindex="0">
-                                        <i class="icon-heart"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="sna_content">
-                                <a href="{% url 'detail' item.pro.id %}">
-                                    <h4>{{item.pro.Name}}</h4>
-                                </a>
-                                <div class="ratprice">
-                                    <div class="price">
-                                        <span class="org_price">{{item.pro.Price}}</span>
-                                        
-                                    </div>
-                                    <div class="rating">
-                                        <div class="d-flex align-items-center justify-content-start">
-                                            <div class="rating_star">
-                                                <span><i class="las la-star"></i></span>
-                                                <span><i class="las la-star"></i></span>
-                                                <span><i class="las la-star"></i></span>
-                                                <span><i class="las la-star"></i></span>
-                                                <span><i class="las la-star"></i></span>
+            <ul class="shape-group">
+             <li class="shape-1"><img src="{% static 'assets/images/others/shape-1.png' %}" alt="Shape"></li>
+            <li class="shape-2"><img src="{% static 'assets/images/others/shape-2.png' %}" alt="Shape"></li>
+            </ul>
+        </div>
+
+        <!-- Start Categorie Area  -->
+        <div class="axil-categorie-area bg-color-white axil-section-gapcommon">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <span class="title-highlighter highlighter-secondary"> <i class="far fa-tags"></i> Categories</span>
+                    <h2 class="title">Browse by Category</h2>
+                </div>
+                <div class="categrie-product-activation slick-layout-wrapper--15 axil-slick-arrow  arrow-top-slide">
+                    {% for cat in categories %}
+                    <div class="slick-single-layout">
+                        <div class="categrie-product" data-sal="zoom-out" data-sal-delay="200" data-sal-duration="500">
+                            <a href="{% url 'shop_by_category' cat.id %}">
+                                <img class="img-fluid" src="{{cat.image.url}}" alt="product categorie">
+                                <h6 class="cat-title">{{cat.name}}</h6>
+                            </a>
+                        </div>
+                        <!-- End .categrie-product -->
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- End Categorie Area  -->
+
+        <!-- Poster Countdown Area  -->
+      
+        <!-- End Poster Countdown Area  -->
+
+        <!-- Start Expolre Product Area  -->
+        <div class="axil-product-area bg-color-white axil-section-gap">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <span class="title-highlighter highlighter-primary"> <i class="far fa-shopping-basket"></i> Our Products</span>
+                    <h2 class="title">Explore our Products</h2>
+                </div>
+                <div class="explore-product-activation slick-layout-wrapper slick-layout-wrapper--15 axil-slick-arrow arrow-top-slide">
+                    <div class="slick-single-layout">
+                        <div class="row row--15">
+                            {% for pro in product %}
+                                <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30">
+                                    <div class="axil-product product-style-one">
+                                        <div class="thumbnail">
+                                            <a href="single-product.html">
+                                                <img data-sal="zoom-out" data-sal-delay="200" data-sal-duration="800" loading="lazy" class="main-img" src="{{pro.Image.url}}" alt="Product Images">
+                                                <img class="hover-img" src="{{pro.Image.url}}" alt="Product Images">
+                                            </a>
+                                            <div class="label-block label-right">
+                                                <div class="product-badget">20% Off</div>
                                             </div>
-                                            <p class="rating_count">(150)</p>
+                                            <div class="product-hover-action">
+                                                <ul class="cart-action">
+                                                    <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i class="far fa-eye"></i></a></li>
+                                                    <li class="select-option">
+                                                        <a href="{% url 'add_to_cart' pro.id %}">
+                                                            Add to Cart
+                                                        </a>
+                                                    </li>
+                                                    <li class="wishlist"><a href="{% url 'add_to_wishlist' pro.id %}"><i class="far fa-heart"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-content">
+                                            <div class="inner">
+                                                <div class="product-rating">
+                                                    <span class="icon">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </span>
+                                                    <span class="rating-number">(64)</span>
+                                                </div>
+                                                <h5 class="title"><a href="single-product.html">{{pro.Name}}</a></h5>
+                                                <div class="product-price-variant">
+                                                    <span class="price current-price">{{pro.Price}}</span>
+                                                    
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="product_adcart">
-                                    <a href="{% url 'add_to_cart' item.pro.id %}" class="default_btn">Add to cart</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- End .slick-single-layout -->
+                   
+                    <!-- End .slick-single-layout -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 text-center mt--20 mt_sm--0">
+                        <a href="{% url 'shop'  %}" class="axil-btn btn-bg-lighter btn-load-more">View All Products</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- End Expolre Product Area  -->
+
+        <!-- Start Testimonila Area  -->
+      
+        <!-- End Testimonila Area  -->
+
+        <!-- Start New Arrivals Product Area  -->
+        <div class="axil-new-arrivals-product-area bg-color-white axil-section-gap pb--0">
+            <div class="container">
+                <div class="product-area pb--50">
+                    <div class="section-title-wrapper">
+                        <span class="title-highlighter highlighter-primary"><i class="far fa-shopping-basket"></i>This Week’s</span>
+                        <h2 class="title">New Arrivals</h2>
+                    </div>
+                    <div class="new-arrivals-product-activation slick-layout-wrapper--30 axil-slick-arrow  arrow-top-slide">
+
+                        {% for pro in pro %}
+                        <div class="slick-single-layout">
+                            <div class="axil-product product-style-two">
+                                <div class="thumbnail">
+                                    <a href="single-product.html">
+                                        <img data-sal="zoom-out" data-sal-delay="200" data-sal-duration="500" src="{{pro.Image.url}}" alt="Product Images">
+                                    </a>
+                                    <div class="label-block label-right">
+                                        <div class="product-badget">10% OFF</div>
+                                    </div>
+                                </div>
+                                <div class="product-content">
+                                    <div class="inner">
+                                        <h5 class="title"><a href="single-product.html">{{pro.Name}}</a></h5>
+                                        <div class="product-price-variant">
+                                            
+                                            <span class="price current-price">{{pro.Price}}</span>
+                                        </div>
+                                        <div class="product-hover-action">
+                                            <ul class="cart-action">
+                                                <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i class="far fa-eye"></i></a></li>
+                                                <li class="select-option"><a href="{% url 'add_to_cart' pro.id  %}">Add to Cart</a></li>
+                                                <li class="wishlist"><a href="{% url 'add_to_wishlist' pro.id %}"><i class="far fa-heart"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        {% endfor %}
+                        <!-- End .slick-single-layout -->
+                        <!-- End .slick-single-layout -->
                     </div>
-                {% endfor %}
+                </div>
             </div>
         </div>
-    </section>
+        <!-- End New Arrivals Product Area  -->
+
+        <!-- Start Most Sold Product Area  -->
+        <div class="axil-most-sold-product axil-section-gap">
+            <div class="container">
+                <div class="product-area pb--50">
+                    <div class="section-title-wrapper section-title-center">
+                        <span class="title-highlighter highlighter-primary"><i class="fas fa-star"></i> Most Sold</span>
+                        <h2 class="title">Most Sold in eTrade Store</h2>
+                    </div>
+                    <div class="row row-cols-xl-2 row-cols-1 row--15">
+
+                        <div class="col">
+                            <div class="axil-product-list">
+                                <div class="thumbnail">
+                                    <a href="single-product.html">
+                                        <img data-sal="zoom-in" data-sal-delay="100" data-sal-duration="1500" src="{% static 'assets/images/product/electric/product-09.png' %}" alt="Yantiti Leather Bags">
+                                    </a>
+                                </div>
+                                <div class="product-content">
+                                    <div class="product-rating">
+                                        <span class="rating-icon">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fal fa-star"></i>
+                                </span>
+                                        <span class="rating-number"><span>100+</span> Reviews</span>
+                                    </div>
+                                    <h6 class="product-title"><a href="single-product.html">Media Remote</a></h6>
+                                    <div class="product-price-variant">
+                                        <span class="price current-price">$29.99</span>
+                                        <span class="price old-price">$49.99</span>
+                                    </div>
+                                    <div class="product-cart">
+                                        <a href="cart.html" class="cart-btn"><i class="fal fa-shopping-cart"></i></a>
+                                        <a href="wishlist.html" class="cart-btn"><i class="fal fa-heart"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Most Sold Product Area  -->
+
+        <!-- Start Why Choose Area  -->
+    
+        <!-- End Axil Newsletter Area  -->
+
+    </main>
+
 {% endblock content %}
