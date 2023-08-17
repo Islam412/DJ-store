@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.db.models import Count
-from shop.models import Product, Category,Flash
+from shop.models import Product, Category,Flash,Ofer
 from cart.models import CartItem, wishlistItem 
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 
 def product_search_view(request):
     cart_items_count = 0
@@ -14,9 +15,10 @@ def product_search_view(request):
 
     search_query = request.GET.get('search_query')
     category_id = request.GET.get('category', None)
-
+    ofer = Ofer.objects.all()
     products = Product.objects.all()
     pro = Product.objects.order_by('-id')[:4]
+   
     product = Product.objects.all()
 
     if search_query:
@@ -36,6 +38,8 @@ def product_search_view(request):
         'cart_items_count': cart_items_count,
         'wishlist_items_count': wishlist_items_count,
         'categories': Category.objects.annotate(product_count=Count('products')),
+        'ofer':ofer,
+        
     }
 
     return render(request, 'home/index.html', context)

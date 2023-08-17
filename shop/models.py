@@ -39,7 +39,14 @@ class Product(models.Model):
     def __str__(self):
         return self.Name
 #________________________________________________________
-
+class Product_Images (models.Model):
+    product = models.ForeignKey(Product,on_delete=models.SET_NULL,related_name='Product_images',null=True,blank=True)
+    image1=models.ImageField(upload_to='productimages/',null=True,blank=True)
+    image2=models.ImageField(upload_to='productimages/',null=True,blank=True)
+    image3=models.ImageField(upload_to='productimages/',null=True,blank=True)
+    image4=models.ImageField(upload_to='productimages/',null=True,blank=True)
+    image5=models.ImageField(upload_to='productimages/',null=True,blank=True)
+#_________________________________________________________
 
 class Review(models.Model):
     user = models.ForeignKey(CustomUser,on_delete=models.SET_NULL,related_name='review_user',null=True,blank=True)
@@ -54,3 +61,8 @@ class Flash(models.Model):
     def __str__(self):
         return str(self.pro)
 #_____________________________________________________________________________
+class Ofer(models.Model):
+    price = models.IntegerField()
+    product = models.ForeignKey(Product,on_delete=models.SET_NULL,related_name='ofer_product',null=True,blank=True)
+    def __str__(self):
+        return str(self.product)
