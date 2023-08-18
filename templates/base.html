@@ -92,7 +92,7 @@
                         <nav class="mainmenu-nav">
                             <button class="mobile-close-btn mobile-nav-toggler"><i class="fas fa-times"></i></button>
                             <div class="mobile-nav-brand">
-                                <a href="index.html" class="logo">
+                                <a href="{% url 'home' %}" class="logo">
                                     <img src="{% static 'assets/images/logo/logo.png' %}" alt="Site Logo">
                                 </a>
                             </div>
@@ -124,9 +124,8 @@
                                     <i class="flaticon-heart"></i>
                                 </a>
                             </li>
-                            <li class="shopping-cart">
-                                <a href="{% url 'cart' %}" class="cart-dropdown-btn">
-                                    <span class="cart-count">{{cart_items_count}}</span>
+                            <li class="wishlist">
+                                <a href="{% url 'cart' %}">
                                     <i class="flaticon-shopping-cart"></i>
                                 </a>
                             </li>
@@ -320,6 +319,51 @@
 <!-- Main JS -->
 <script src="{% static 'assets/js/main.js' %}"></script>
 
+<div class="header-search-modal" id="header-search-modal">
+        <button class="card-close sidebar-close"><i class="fas fa-times"></i></button>
+        <div class="header-search-wrap">
+            <div class="card-header">
+                <form method="GET" action="{% url 'home' %}">
+                    <div class="input-group">
+                        <input type="text" name="search_query" value="{{ search_query }}" placeholder="Search product..." id="show_suggest">
+                        <button type="submit" class="axil-btn btn-bg-primary"><i class="far fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-body">
+                <div class="search-result-header">
+                    <a href="{% url 'shop' %}" class="view-all">View All</a>
+                </div>
+                <div class="psearch-results">
+                    {% for product in products %}
+
+                        <div class="axil-product-list">
+                            <div class="thumbnail">
+                                <a href="single-product.html">
+                                    <img src="{{product.Image.url}}" alt="Yantiti Leather Bags">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                
+                                
+                                <h6 class="product-title"><a href="single-product.html">{{product.Name}}</a></h6>
+                                <div class="product-price-variant">
+                                    <span class="price current-price">{{product.Price}}</span>
+                                    
+                                </div>
+                                <div class="product-cart">
+                                    <a href="{% url 'add_to_cart' product.id %}" class="cart-btn"><i class="fal fa-shopping-cart"></i></a>
+                                    <a href="{% url 'add_to_wishlist' product.id %}" class="cart-btn"><i class="fal fa-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
