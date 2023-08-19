@@ -79,7 +79,7 @@
                     {% for cat in categories %}
                     <div class="slick-single-layout">
                         <div class="categrie-product" data-sal="zoom-out" data-sal-delay="200" data-sal-duration="500">
-                            <a href="{% url 'shop_by_category' cat.id %}">
+                            <a href="{% url 'grid_by_category' cat.id %}">
                                 <img class="img-fluid" src="{{cat.image.url}}" alt="product categorie">
                                 <h6 class="cat-title">{{cat.name}}</h6>
                             </a>

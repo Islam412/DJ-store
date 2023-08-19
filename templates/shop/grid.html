@@ -42,7 +42,7 @@
                                 <div class="shop-submenu">
                                     <ul>
                                         {% for cat in subCategory %}
-                                            <li><a href="#">{{ cat.name }}</a></li>
+                                            <li><a href="{% url 'grid_by_subcategory' category_id=cat.category.id sub_id=cat.id %}"> {{cat.name}}</a></li>
                                         {% endfor %}
                                         
                                     </ul>
@@ -149,8 +149,8 @@
                                         </div>
                                         <div class="product-hover-action">
                                             <ul class="cart-action">
-                                                <li class="wishlist"><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                <li class="select-option"><a href="cart.html">Add to Cart</a></li>
+                                                <li class="wishlist"><a href="{% url 'add_to_wishlist' pro.id %}"><i class="far fa-heart"></i></a></li>
+                                                <li class="select-option"><a href="{% url 'add_to_cart' pro.id %}">Add to Cart</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -179,23 +179,7 @@
         <!-- End Shop Area  -->
 
         <!-- Start Axil Newsletter Area  -->
-        <div class="axil-newsletter-area axil-section-gap pt--0">
-            <div class="container">
-                <div class="etrade-newsletter-wrapper bg_image bg_image--5">
-                    <div class="newsletter-content">
-                        <span class="title-highlighter highlighter-primary2"><i class="fas fa-envelope-open"></i>Newsletter</span>
-                        <h2 class="title mb--40 mb_sm--30">Get weekly update</h2>
-                        <div class="input-group newsletter-form">
-                            <div class="position-relative newsletter-inner mb--15">
-                                <input placeholder="example@gmail.com" type="text">
-                            </div>
-                            <button type="submit" class="axil-btn mb--15">Subscribe</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End .container -->
-        </div>
+       
         <!-- End Axil Newsletter Area  -->
     </main>
 
