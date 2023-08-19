@@ -41,11 +41,7 @@ class Product(models.Model):
 #________________________________________________________
 class Product_Images (models.Model):
     product = models.ForeignKey(Product,on_delete=models.SET_NULL,related_name='Product_images',null=True,blank=True)
-    image1=models.ImageField(upload_to='productimages/',null=True,blank=True)
-    image2=models.ImageField(upload_to='productimages/',null=True,blank=True)
-    image3=models.ImageField(upload_to='productimages/',null=True,blank=True)
-    image4=models.ImageField(upload_to='productimages/',null=True,blank=True)
-    image5=models.ImageField(upload_to='productimages/',null=True,blank=True)
+    images=models.ImageField(upload_to='productimages/',null=True,blank=True)
 #_________________________________________________________
 
 class Review(models.Model):

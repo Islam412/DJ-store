@@ -2,150 +2,169 @@
 {% load bootstrap4 %}
 {% load static %}
 {% block content %}
- <div class="container">
-        <div class="breadcrumbs">
-            <a href="#"><i class="las la-home"></i></a>
-            <a href="#">Shop</a>
-            <a href="#" class="active">{{pro.Name}}</a>
-        </div>
-    </div>
+  <main class="main-wrapper">
+        <!-- Start Shop Area  -->
+        <div class="axil-single-product-area axil-section-gap pb--0 bg-color-white">
+            <div class="single-product-thumb mb--40">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7 mb--40">
+                            <div class="row">
+                                <div class="col-lg-10 order-lg-2">
+                                    <div class="single-product-thumbnail-wrap zoom-gallery">
+                                        <div class="single-product-thumbnail product-large-thumbnail-3 axil-product">
 
-     <div class="product_view_wrap section_padding_b">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="product_view_slider">
-                        <div class="single_viewslider">
-                           <img loading="lazy" src="{{pro.Image.url}}" alt="product">
+                                            <div class="thumbnail">
+                                                <a href="{{pro.Image.url}}" class="popup-zoom">
+                                                    <img src="{{pro.Image.url}}" alt="Product Images">
+                                                </a>
+                                            </div>
+                                            {% for image in related_images %}
+                                                <div class="thumbnail">
+                                                    <a href="{{image.images.url}}" class="popup-zoom">
+                                                        <img src="{{image.images.url}}" alt="Product Images">
+                                                    </a>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="label-block">
+                                            <div class="product-badget">20% OFF</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="col-lg-5 mb--40">
+                            <div class="single-product-content">
+                                <div class="inner">
+                                    <h2 class="product-title">{{pro.Name}}</h2>
+                                    <span class="price-amount">{{pro.Price}}</span>
+                                    <div class="product-rating">
+                                        <div class="star-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <div class="review-link">
+                                            <a href="#">(<span>{{pro.review.product.all | length}}</span> customer reviews)</a>
+                                        </div>
+                                    </div>
+                                    <ul class="product-meta">
+                                        <li><i class="fal fa-check"></i>In stock</li>
+                                        <li><i class="fal fa-check"></i>Free delivery available</li>
+                                        <li><i class="fal fa-check"></i>Sales 30% Off Use Code: MOTIVE30</li>
+                                    </ul>
+                                    <p class="description">In ornare lorem ut est dapibus, ut tincidunt nisi pretium. Integer ante est, elementum eget magna. Pellentesque sagittis dictum libero, eu dignissim tellus.</p>
 
-                        </div>
-                    </div>
-                 
-                </div>
-                <div class="col-lg-6">
-                    <div class="product_info_wrapper">
-                        <div class="product_base_info">
-                            <h1>{{pro.Name}}</h1>
-                            <div class="rating">
-                                <div class="d-flex align-items-center">
-                                    <div class="rating_star">
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
-                                        <span><i class="las la-star"></i></span>
+                                    <div class="product-variations-wrapper">
+
+                                        <!-- Start Product Variation  -->
+                                        <div class="product-variation">
+                                            <h6 class="title">Colors:</h6>
+                                            <div class="color-variant-wrapper">
+                                                <ul class="color-variant">
+                                                    <li class="color-extra-01 active"><span><span class="color"></span></span>
+                                                    </li>
+                                                    <li class="color-extra-02"><span><span class="color"></span></span>
+                                                    </li>
+                                                    <li class="color-extra-03"><span><span class="color"></span></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- End Product Variation  -->
+
+                                        <!-- Start Product Variation  -->
+                                        <div class="product-variation product-size-variation">
+                                            <h6 class="title">Size:</h6>
+                                            <ul class="range-variant">
+                                                <li>xs</li>
+                                                <li>s</li>
+                                                <li>m</li>
+                                                <li>l</li>
+                                                <li>xl</li>
+                                            </ul>
+                                        </div>
+                                        <!-- End Product Variation  -->
+
                                     </div>
-                                    <p class="rating_count">50 Reviews</p>
+
+                                    <!-- Start Product Action Wrapper  -->
+                                    <div class="product-action-wrapper d-flex-center">
+                                        <!-- Start Quentity Action  -->
+                                        <div class="pro-qty"><input type="text" value="1"></div>
+                                        <!-- End Quentity Action  -->
+
+                                        <!-- Start Product Action  -->
+                                        <ul class="product-action d-flex-center mb--0">
+                                            <li class="add-to-cart"><a href="cart.html" class="axil-btn btn-bg-primary">Add to Cart</a></li>
+                                            <li class="wishlist"><a href="wishlist.html" class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a></li>
+                                        </ul>
+                                        <!-- End Product Action  -->
+
+                                    </div>
+                                    <!-- End Product Action Wrapper  -->
                                 </div>
                             </div>
-                            <div class="product_other_info">
-                                <p><span>Availability:</span><span class="text-green">In Stock</span></p>
-                                <p><span>Brand:</span>{{pro.Brand}}</p>
-                                <p><span>Category:</span>{{pro.Category}}</p>
-                                <p><span>Color</span> {{ color_name }}</p>
-                            </div>
-                            <div class="price mt-3 mb-3 d-flex align-items-center">
-                                <span class="org_price ms-2">EG  {{pro.Price}}</span>
-                                <div class="disc_tag ms-3">-30%</div>
-                            </div>
-                            <div class="pd_dtails">
-                                <p>
-                                    {{pro.Description}}
-                                </p>
-                            </div>
-                            <div class="shop_filter border-bottom-0 pb-0">
-                                <div class="size_selector mb-3">
-                                    <h5>Size</h5>
-                                    <div class="d-flex align-items-center">
-                                        <div class="single_size_opt">
-                                            <input type="radio" hidden name="size" class="size_inp" id="size-xs">
-                                            <label for="size-xs">XS</label>
-                                        </div>
-                                        <div class="single_size_opt ms-2">
-                                            <input type="radio" hidden name="size" class="size_inp" id="size-s">
-                                            <label for="size-s">S</label>
-                                        </div>
-                                        <div class="single_size_opt ms-2">
-                                            <input type="radio" hidden name="size" class="size_inp" id="size-m" checked>
-                                            <label for="size-m">M</label>
-                                        </div>
-                                        <div class="single_size_opt ms-2">
-                                            <input type="radio" hidden name="size" class="size_inp" id="size-l">
-                                            <label for="size-l">L</label>
-                                        </div>
-                                        <div class="single_size_opt ms-2">
-                                            <input type="radio" hidden name="size" class="size_inp" id="size-xl">
-                                            <label for="size-xl">XL</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cart_qnty ms-md-auto">
-                                <p>Quantity</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="cart_qnty_btn">
-                                        <i class="las la-minus"></i>
-                                    </div>
-                                    <div class="cart_count">1</div>
-                                    <div class="cart_qnty_btn">
-                                        <i class="las la-plus"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product_buttons">
-                            <a href="{% url 'add_to_cart' pro.id %}" class="default_btn small rounded me-sm-3 me-2 px-4"><i class="icon-cart me-2"></i> Add to Cart</a>
-                            
-                        </div>
-                        <div class="share_icons footer_icon d-flex">
-                            <a href="#"><i class="lab la-facebook-f"></i></a>
-                            <a href="#"><i class="lab la-twitter"></i></a>
-                            <a href="#"><i class="lab la-instagram"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="product_view_tabs mt-4">
-                
-                <div class="pv_tab_buttons" class="spec_text">
-                    <div class="pbt_single_btn activ" data-target=".review">Review ({{pro.review_product.all |length}})</div>
-                </div>
-                
-            {% for review in reviews %}
-                <div class="pb_tab_content review">
-                    <div class="review_cont_wrap">
-                        <div class="single_review_wrp">
-                            <div class="review_avatar">
-                                {% if review.user.img %}
-                                    <img loading="lazy" src="{{ review.user.img.url }}" alt="user">
-                                {% else %}
-                                    <img loading="lazy" src="{% static 'assets/images/default_image.jpeg' %}" alt="user">
-                                {% endif %}
+            <!-- End .single-product-thumb -->
 
+           
+            <!-- woocommerce-tabs -->
+
+        </div>
+        <!-- End Shop Area  -->
+
+        <!-- Start Recently Viewed Product Area  -->
+        <div class="axil-product-area bg-color-white axil-section-gap pb--50 pb_sm--30">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <span class="title-highlighter highlighter-primary"><i class="far fa-shopping-basket"></i> Your Recently</span>
+                    <h2 class="title">Related Items</h2>
+                </div>
+
+                <div class="recent-product-activation slick-layout-wrapper--15 axil-slick-arrow arrow-top-slide">
+                    {% for pro in related %}
+                    <div class="slick-single-layout">
+                        <div class="axil-product">
+                            <div class="thumbnail">
+                                <a href="single-product.html">
+                                    <img src="{{pro.Image.url}}" alt="Product Images">
+                                </a>
+                                <div class="label-block label-right">
+                                    <div class="product-badget">20% OFF</div>
+                                </div>
+                                <div class="product-hover-action">
+                                    <ul class="cart-action">
+                                        <li class="wishlist"><a href="{% url 'add_to_wishlist' pro.id %}"><i class="far fa-heart"></i></a></li>
+                                        <li class="select-option"><a href="{% url 'add_to_cart' pro.id %}">Add to Cart</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="review_content">
-                                <h5>by {{review.user.name}}</h5>
-                                <div class="review_date">{{review.date}}</div>
-                                <div class="review_body">
-                                    <p>{{review.content}}</p>
+                            <div class="product-content">
+                                <div class="inner">
+                                    <h5 class="title"><a href="single-product.html">{{pro.Name}}</a></h5>
+                                    <div class="product-price-variant">
+                                        <span class="price current-price">{{pro.Price}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>  
-              
-            {% endfor %} 
-            </div>
-        
+                    {% endfor %}
 
-            <form method="post">
-                {% csrf_token %}
-                {% bootstrap_form form %}
-                {% buttons %}
-                    <button type="submit">Submit Review</button>
-                {% endbuttons %}
-            </form>
-        
+                </div>
+            </div>
         </div>
-    </div>
+        <!-- End Recently Viewed Product Area  -->
+        <!-- Start Axil Newsletter Area  -->
+       
+        <!-- End Axil Newsletter Area  -->
+    </main>
 {% endblock content %}

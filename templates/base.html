@@ -65,8 +65,14 @@
                         <div class="header-top-link">
                             <ul class="quick-link">
                                 <li><a href="#">Help</a></li>
-                                <li><a href="{% url 'signup'  %}">Join Us</a></li>
-                                <li><a href="{% url 'signin'  %}">Sign In</a></li>
+                                     {% if user.is_authenticated %}
+                                        <li class="withsubs">
+                                            <a href="{% url 'logout' %}">Sign OUT</a>
+                                        </li>
+                                    {% else %}
+                                          <li><a href="{% url 'signup'  %}">Join Us</a></li>
+                                        <li><a href="{% url 'signin'  %}">Sign In</a></li>
+                                    {% endif %}
                             </ul>
                         </div>
                     </div>

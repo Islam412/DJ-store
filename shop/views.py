@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404, redirect
-from .models import Product, Brand , Category,SubCategory,Review
+from .models import Product, Brand , Category,SubCategory,Review,Product_Images
 from cart.models import Cart,CartItem,Wishlist,wishlistItem
 from django.views.generic import ListView,DeleteView,DetailView
 from django.contrib.auth.decorators import login_required
@@ -77,6 +77,15 @@ COLOR_MAP = {
 def detail(request, pk):
     pro = Product.objects.get(id=pk)
     
+    # Get the subcategory of the current product
+    subcategory = pro.SubCategory
+    
+    # Fetch related products with the same subcategory
+    related = Product.objects.filter(SubCategory=subcategory).exclude(id=pk)
+    
+    # Fetch images for related products
+    related_images = Product_Images.objects.filter(product=pro)
+    
     color_code = pro.Color
     color_name = COLOR_MAP.get(color_code, 'Unknown Color')
     
@@ -91,7 +100,7 @@ def detail(request, pk):
             form.user = request.user
             form.save()
             # Redirect back to the detail page after adding the review
-            return redirect('detail',pk=pk)
+            return redirect('detail', pk=pk)
     else:
         form = AddReviewForm()
 
@@ -100,6 +109,8 @@ def detail(request, pk):
         'color_name': color_name,
         'reviews': reviews,
         'form': form,
+        'related': related,
+        'related_images': related_images,  # Pass the related product images to the template
     })
 
 
