@@ -1,94 +1,104 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-  <!-- breadcrumbs -->
-    <div class="container">
-      <div class="breadcrumbs">
-        <a href="{% url 'home'  %}"><i class="las la-home"></i></a>
-        <a href="#" class="active">Shopping Cart</a>
-      </div>
-    </div>
+    <main class="main-wrapper">
 
-     <div class="cart_area section_padding_b">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-9">
-            <h4 class="shop_cart_title sopcart_ttl d-none d-lg-flex">
-              <span>Product</span>
-              <span>Quantity</span>
-              <span>Total Price</span>
-            </h4>
-            <div class="shop_cart_wrap">
+        <!-- Start Cart Area  -->
+        <div class="axil-product-cart-area axil-section-gap">
+            <div class="container">
+                <div class="axil-product-cart-wrap">
+        
+                    <div class="table-responsive">
+                        <table class="table axil-product-table axil-cart-table mb--40">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="product-remove"></th>
+                                    <th scope="col" class="product-thumbnail">Product</th>
+                                    <th scope="col" class="product-title"></th>
+                                    <th scope="col" class="product-price">Price</th>
+                                    <th scope="col" class="product-quantity">Quantity</th>
+                                    <th scope="col" class="product-subtotal">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {% for item in cart_items %}
+                                  <tr>
+                                      <form action="{% url 'delete_cart_item' item.id %}" method="post">
+                                        {% csrf_token %}
+                                        <td class="product-remove"><a href="{% url 'delete_cart_item' item.id %}" class="remove-wishlist"><i class="fal fa-times"></i></a></td>
+                                      </form>
 
+                                      <td class="product-thumbnail"><a href="{% url 'detail' item.product.id %}"><img src="{{ item.product.Image.url }}" alt="Digital Product"></a></td>
+                                      <td class="product-title"><a href="{% url 'detail' item.product.id %}">{{item.product.Name}}</a></td>
+                                      <td class="product-price" data-title="Price"><span class="currency-symbol">EG</span>{{item.product.Price}}</td>
+                                      <td class="product-quantity" data-title="Qty">
+                                          <div class="pro-qty">
+                                              <input type="number" class="quantity-input" value="1">
+                                          </div>
+                                      </td>
+                                      <td class="product-subtotal" data-title="Subtotal"><span class="currency-symbol">$</span>275.00</td>
+                                  </tr>
+                              {% endfor %}
 
-                {% for item in cart_items %}
-                  <div class="single_shop_cart d-flex align-items-center flex-wrap">
-                      <div class="cart_img mb-4 mb-md-0">
-                          <img loading="lazy" src="{{ item.product.Image.url }}" alt="product" />
-                      </div>
-                      <div class="cart_cont">
-                          <a href="product-view.html">
-                              <h5>{{ item.product.Name }}</h5>
-                          </a>
-                          
-                      </div>
-                        <div class="cart_qnty d-flex align-items-center ms-md-auto">
-                            <form method="post" action="{% url 'add_to_cart' product_id=item.product.id %}">
-                                {% csrf_token %}
-                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
-                                <button type="submit">OK</button>
-                            </form>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="cart-update-btn-area">
+                        <div class="input-group product-cupon">
+                            <input placeholder="Enter coupon code" type="text">
+                            <div class="product-cupon-btn">
+                                <button type="submit" class="axil-btn btn-outline">Apply</button>
+                            </div>
                         </div>
-
-
-                      <div class="cart_price ms-auto">
-                          
-                      </div>
-                      <div class="cart_remove ms-auto">
-                          <form action="{% url 'delete_cart_item' item.id %}" method="post">
-                              {% csrf_token %}
-                              <button type="submit"> <i class="icon-trash"></i> </button>
-                          </form>
-                      </div>
-                  </div>
-              {% endfor %}
-
-
-
-
-              
-
+                        <div class="update-btn">
+                            <a href="#" class="axil-btn btn-outline">Update Cart</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-7 offset-xl-7 offset-lg-5">
+                            <div class="axil-order-summery mt--80">
+                                <h5 class="title mb--20">Order Summary</h5>
+                                <div class="summery-table-wrap">
+                                    <table class="table summery-table mb--30">
+                                        <tbody>
+                                            <tr class="order-subtotal">
+                                                <td>Subtotal</td>
+                                                <td>$117.00</td>
+                                            </tr>
+                                            <tr class="order-shipping">
+                                                <td>Shipping</td>
+                                                <td>
+                                                    <div class="input-group">
+                                                        <input type="radio" id="radio2" name="shipping">
+                                                        <label for="radio2">Normal: 22.50 EG</label>
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <input type="radio" id="radio3" name="shipping">
+                                                        <label for="radio3">Fast Delivary: 50 EG</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="order-tax">
+                                                <td>State Tax</td>
+                                                <td>$8.00</td>
+                                            </tr>
+                                            <tr class="order-total">
+                                                <td>Total</td>
+                                                <td class="order-total-amount">$125.00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <a href="{% url 'checkout'  %}" class="axil-btn btn-bg-primary checkout-btn">Process to Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-lg-3 mt-4 mt-lg-0">
-            <div class="cart_summary">
-              <h4>Order Summary</h4>
-              <div class="cartsum_text d-flex justify-content-between">
-                <p class="text-semibold">Subtotal</p>
-                <p class="text-semibold"></p>
-              </div>
-              <div class="cartsum_text d-flex justify-content-between">
-                <p>Delivery</p>
-                <p>EG 20</p>
-              </div>
-              <div class="cart_sum_total d-flex justify-content-between">
-                <p>Total</p>
-                <p></p>
-              </div>
-              <div class="cart_sum_coupon">
-                <input type="text" placeholder="Enter coupon" />
-                <button>apply</button>
-              </div>
-              <div class="cart_sum_pros">
-                 <a href="{% url 'checkout'  %}"> Proccees to checkout  </a> 
-              </div>
-              
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-
+        <!-- End Cart Area  -->
+    </main>
+   
 
 
 {% endblock content %}

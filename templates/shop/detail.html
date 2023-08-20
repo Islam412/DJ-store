@@ -100,8 +100,8 @@
 
                                         <!-- Start Product Action  -->
                                         <ul class="product-action d-flex-center mb--0">
-                                            <li class="add-to-cart"><a href="cart.html" class="axil-btn btn-bg-primary">Add to Cart</a></li>
-                                            <li class="wishlist"><a href="wishlist.html" class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a></li>
+                                            <li class="add-to-cart"><a href="{% url 'add_to_cart' pro.id %}" class="axil-btn btn-bg-primary">Add to Cart</a></li>
+                                            <li class="wishlist"><a href="{% url 'add_to_wishlist' pro.id %}" class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a></li>
                                         </ul>
                                         <!-- End Product Action  -->
 
@@ -134,7 +134,7 @@
                     <div class="slick-single-layout">
                         <div class="axil-product">
                             <div class="thumbnail">
-                                <a href="single-product.html">
+                                <a href="{% url 'detail' pro.id %}">
                                     <img src="{{pro.Image.url}}" alt="Product Images">
                                 </a>
                                 <div class="label-block label-right">
@@ -149,7 +149,7 @@
                             </div>
                             <div class="product-content">
                                 <div class="inner">
-                                    <h5 class="title"><a href="single-product.html">{{pro.Name}}</a></h5>
+                                    <h5 class="title"><a href="{% url 'detail' pro.id %}">{{pro.Name}}</a></h5>
                                     <div class="product-price-variant">
                                         <span class="price current-price">{{pro.Price}}</span>
                                     </div>
