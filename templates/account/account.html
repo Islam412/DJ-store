@@ -1,115 +1,132 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-        <!-- breadcrumbs -->
-    <div class="container">
-      <div class="breadcrumbs">
-        <a href="{% url 'home'  %}"><i class="las la-home"></i></a>
-        <a href="#" class="active">My Account</a>
-      </div>
-    </div>
-     <div class="my_account_wrap section_padding_b">
-      <div class="container">
-        <div class="row">
-          <!--  account sidebar  -->
-          <div class="col-lg-3">
-            <div class="account_sidebar">
-              <div class="account_profile position-relative shadow_sm">
-                <div class="acprof_img">
-                  <a href="{% url 'user' %}">
+  <main class="main-wrapper">
+        <!-- Start Breadcrumb Area  -->
+       
+        <!-- End Breadcrumb Area  -->
 
-                    <img
-                          loading="lazy"
-                          src="{% if user.img %}{{ user.img.url }}{% else %}{% static 'assets/images/default_image.jpeg' %}{% endif %}"
-                          alt="Profile Image"
-                    />
+        <!-- Start My Account Area  -->
+        <div class="axil-dashboard-area axil-section-gap">
+            <div class="container">
+                <div class="axil-dashboard-warp">
+                    <div class="axil-dashboard-author">
+                        <div class="media">
+
+                            <div class="thumbnail" style="width: 70px; height: 70px ;">
+                                <img  src="{% if user.img %}{{ user.img.url }}{% else %}{% static 'assets/images/default_image.jpeg' %}{% endif %}" alt="Hello Annie">
+                            </div>
+                            
+                            <div class="media-body">
+                                <h5 class="title mb-0">Hello {{user.name}}</h5>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-3 col-md-4">
+                            <aside class="axil-dashboard-aside">
+                                <nav class="axil-dashboard-nav">
+                                    <div class="nav nav-tabs" role="tablist">
+                                        <a class="nav-item nav-link active" data-bs-toggle="tab" href="#nav-dashboard" role="tab" aria-selected="true"><i class="fas fa-th-large"></i>Dashboard</a>
+                                        <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-orders" role="tab" aria-selected="false"><i class="fas fa-shopping-basket"></i>Orders</a>
+                                        <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-account" role="tab" aria-selected="false"><i class="fas fa-user"></i>Account Details</a>
+                                        <a class="nav-item nav-link" href="{% url 'logout' %}"><i class="fal fa-sign-out"></i>Logout</a>
+                                    </div>
+                                </nav>
+                            </aside>
+                        </div>
+                        <div class="col-xl-9 col-md-8">
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="nav-dashboard" role="tabpanel">
+                                    <div class="axil-dashboard-overview">
+                                        <div class="welcome-text">Hello {{user.name}} (not <span>?</span> <a href="{% url 'logout' %}">Log Out</a>)</div>
+                                        <p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.</p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-orders" role="tabpanel">
+                                    <div class="axil-dashboard-order">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Order</th>
+                                                        <th scope="col">Date</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">Total</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                  {% for order in user_orders %}
+                                                    <tr>
+                                                        <th scope="row">#{{ order.pk }}</th>
+                                                        <td>{{order.created_at}}</td>
+                                                        <td>{{ order.get_status_display }}</td>
+                                                        <td>EG {{order.total_price}} </td>
+                                                        
+                                                    </tr>
+                                                  {% endfor %}
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-pane fade" id="nav-account" role="tabpanel">
+                                    <div class="col-lg-9">
+                                        <div class="axil-dashboard-account">
+                                            <form method="post" class="account-details-form" >
+                                              {% csrf_token %}
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label>Name</label>
+                                                            <input type="text" class="form-control" value="{{user.name}}">
+                                                        </div>
+                                                    </div>
+                                             
+                                       
+                                                    
+                                                      
+                                                      <div class="form-group">
+                                                        <label>Old Password</label>
+                                                        <input type="password" name="old_password" class="form-control">
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label>New Password</label>
+                                                        <input type="password" name="new_password1" class="form-control">
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label>Confirm New Password</label>
+                                                        <input type="password" name="new_password2" class="form-control">
+                                                      </div>
+                                                      <div class="form-group mb--0">
+                                                        <button type="submit" class="axil-btn" name="change_password">Change Password</button>
+                                                      </div>
+                                                    </form>
+                                                    
+                                                    {% if messages %}
+                                                    <div class="messages">
+                                                      {% for message in messages %}
+                                                      <p{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+                                                        {% endfor %}
+                                                    </div>
+                                                    {% endif %}
 
 
-                  </a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="acprof_cont">
-                  <p>Hello,</p>
-                  <h4>{{user.name}}</h4>
-                </div>
-                <div class="profile_hambarg d-lg-none d-block">
-                  <i class="las la-bars"></i>
-                </div>
-              </div>
-              <div class="acprof_wrap shadow_sm">
-                <div class="acprof_links">
-                  <a href="{% url 'usre_info' %}" class="active">
-                    <h4 class="acprof_link_title">
-                      <i class="lar la-id-card"></i>
-                      Manage My Account
-                    </h4>
-                  </a>
-                  <a href="{% url 'usre_info' %}">Profile Information</a>
-                  <a href="{% url 'change_password' %}">Change Password</a>
-                </div>
-                
-               
-                <div class="acprof_links">
-                  <a href="{% url 'wishlist_list'  %}">
-                    <h4 class="ac_link_title">
-                      <i class="lar la-heart"></i>
-                      My Wishlist
-                    </h4>
-                  </a>
-                </div>
-                <div class="acprof_links border-0">
-                  <a  href="{% url 'logout' %}">
-                    <h4 class="acprof_link_title">
-                      <i class="las la-power-off"></i>
-                      Log Out
-                    </h4>
-                  </a>
-                </div>
-              </div>
             </div>
-          </div>
-          <!-- account content -->
-          <div class="col-lg-9">
-            <div class="account_cont_wrap">
-              <div class="prof_recent_order shadow_sm">
-                <h4>Recent Orders</h4>
-                {% for order in user_orders %}
-                  <div class="single_prof_recorder">
-                    <div class="prorder_img">
-                      {% for cart_item in order.cart_items.all %}
-                        <img
-                            loading="lazy"
-                            src="{{ cart_item.product.Image.url}}"
-                            alt="product"
-                        />
-                      {% endfor %}
-
-                    </div>
-                    <div class="prorder_btn">
-                      <a href="{% url 'order_detail' order.id %}">View Order</a>
-                    </div>
-                    <div class="prorder_txt prorder_odnumber">
-                      <h5>Order Number</h5>
-                      <p>{{ order.pk }}</p>
-                    </div>
-                    <div class="prorder_txt prorder_total">
-                      <h5>Total</h5>
-                      <p>{{ order.total_price }}</p>
-                    </div>
-                    <div class="prorder_txt prorder_status">
-                      <h5 class="d-none d-md-block">Status</h5>
-                      <h5 class="d-block d-md-none">
-                        {{ order.total_price }}
-                      </h5>
-                      <p class="text-color">{{ order.get_status_display }}</p>
-                    </div>
-                  </div>
-                {% endfor %}
-
-
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
+
+    </main>
 {% endblock content %}
