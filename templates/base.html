@@ -24,7 +24,7 @@
 
 
 <body>
- 
+
      <header class="header axil-header header-style-1">
         <div class="header-top-campaign">
             <div class="container position-relative">
@@ -155,8 +155,8 @@
                                             <a href="#">Language</a>
                                         </li>
                                     </ul>
-                                    
-                                    
+
+
                                 </div>
                             </li>
                             <li class="axil-mobile-toggle">
@@ -173,9 +173,9 @@
     </header>
 
     {% block content %}
-    
+
     {% endblock content %}
- 
+
    <footer class="axil-footer-area footer-style-2">
         <!-- Start Footer Top Area  -->
         <div class="footer-top separator-top">
@@ -191,11 +191,11 @@
                             </a>
                         </div> -->
                             <div class="inner">
-                           
+
                                 <ul class="support-list-item">
                                     <li><a href="mailto:example@domain.com"><i class="fal fa-envelope-open"></i> {{info.Email}}</a></li>
                                     <li><a href="tel:(+01)850-315-5862"><i class="fal fa-phone-alt"></i> (+2) {{info.Phone}}</a></li>
-                                     <li><i class="fal fa-map-marker-alt"></i> {{info.Adrees}}</li> 
+                                     <li><i class="fal fa-map-marker-alt"></i> {{info.Adrees}}</li>
                                 </ul>
                             </div>
                         </div>
@@ -227,7 +227,7 @@
                                     <li><a href="terms-of-service.html">Terms Of Use</a></li>
                                     <li><a href="#">FAQ</a></li>
                                     <li><a href="{% url 'contact' %}">Contact</a></li>
-                                    
+
                                 </ul>
                             </div>
                         </div>
@@ -340,17 +340,17 @@
 
                         <div class="axil-product-list">
                             <div class="thumbnail">
-                                < href="{% url 'detail' product.id  %}">
+                                <a href="{% url 'detail' product.id  %}">
                                     <img src="{{product.Image.url}}" alt="Yantiti Leather Bags">
                                 </a>
                             </div>
                             <div class="product-content">
-                                
-                                
-                                <h6 class="product-title"><a href="single-product.html">{{product.Name}}</a></h6>
+
+
+                                <h6 class="product-title"><a href="{% url 'detail' product.id  %}" >{{product.Name}}</a></h6>
                                 <div class="product-price-variant">
                                     <span class="price current-price">{{product.Price}}</span>
-                                    
+
                                 </div>
                                 <div class="product-cart">
                                     <a href="{% url 'add_to_cart' product.id %}" class="cart-btn"><i class="fal fa-shopping-cart"></i></a>
