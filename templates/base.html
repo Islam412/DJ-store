@@ -155,10 +155,8 @@
                                             <a href="#">Language</a>
                                         </li>
                                     </ul>
-                                    <div class="login-btn">
-                                        <a href="{% url 'signin' %}" class="axil-btn btn-bg-primary">Login</a>
-                                    </div>
-                                    <div class="reg-footer text-center">No account yet? <a href="{% url 'signup' %}" class="btn-link">REGISTER HERE.</a></div>
+                                    
+                                    
                                 </div>
                             </li>
                             <li class="axil-mobile-toggle">
@@ -193,14 +191,11 @@
                             </a>
                         </div> -->
                             <div class="inner">
-                                <p>685 Market Street, <br>
-                                Las Vegas, LA 95820, <br>
-                                United States.
-                                </p>
+                           
                                 <ul class="support-list-item">
-                                    <li><a href="mailto:example@domain.com"><i class="fal fa-envelope-open"></i> example@domain.com</a></li>
-                                    <li><a href="tel:(+01)850-315-5862"><i class="fal fa-phone-alt"></i> (+01) 850-315-5862</a></li>
-                                    <!-- <li><i class="fal fa-map-marker-alt"></i> 685 Market Street,  <br> Las Vegas, LA 95820, <br> United States.</li> -->
+                                    <li><a href="mailto:example@domain.com"><i class="fal fa-envelope-open"></i> {{info.Email}}</a></li>
+                                    <li><a href="tel:(+01)850-315-5862"><i class="fal fa-phone-alt"></i> (+2) {{info.Phone}}</a></li>
+                                     <li><i class="fal fa-map-marker-alt"></i> {{info.Adrees}}</li> 
                                 </ul>
                             </div>
                         </div>

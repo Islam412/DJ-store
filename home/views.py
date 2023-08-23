@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.db.models import Count
 from shop.models import Product, Category,Flash,Ofer
 from cart.models import CartItem, wishlistItem 
+from contact.models import Info
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 
 def product_search_view(request):
+    info = Info.objects.first()
     cart_items_count = 0
     wishlist_items_count = 0
     flash = Flash.objects.all()
@@ -39,6 +41,7 @@ def product_search_view(request):
         'wishlist_items_count': wishlist_items_count,
         'categories': Category.objects.annotate(product_count=Count('products')),
         'ofer':ofer,
+        'info':info,
         
     }
 
